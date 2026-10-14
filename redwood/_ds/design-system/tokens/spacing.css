@@ -1,0 +1,41 @@
+/**
+ * ACME Spacing & Layout Tokens
+ */
+
+:root {
+  /* ── Base Spacing Scale (4px grid) ──────────────── */
+  --space-1:    0.25rem;   /*  4px */
+  --space-2:    0.5rem;    /*  8px */
+  --space-3:    0.75rem;   /* 12px */
+  --space-4:    1rem;      /* 16px */
+  --space-5:    1.25rem;   /* 20px */
+  --space-6:    1.5rem;    /* 24px */
+  --space-8:    2rem;      /* 32px */
+  --space-10:   2.5rem;    /* 40px */
+  --space-12:   3rem;      /* 48px */
+  --space-16:   4rem;      /* 64px */
+  --space-20:   5rem;      /* 80px */
+  --space-24:   6rem;      /* 96px */
+
+  /* ── Semantic Spacing ───────────────────────────── */
+  --space-component-xs:     var(--space-2);   /*  8px — tight internal padding */
+  --space-component-sm:     var(--space-3);   /* 12px — compact components */
+  --space-component-md:     var(--space-4);   /* 16px — standard padding */
+  --space-component-lg:     var(--space-6);   /* 24px — generous padding */
+  --space-component-xl:     var(--space-8);   /* 32px — section padding */
+
+  --space-section:          var(--space-12);  /* 48px — between major sections */
+  --space-page-x:           var(--space-8);   /* 32px — page horizontal margin */
+
+  /* ── Border Radius ──────────────────────────────── */
+  --radius-sm:    2px;
+  --radius-md:    3px;
+  --radius-lg:    4px;
+  --radius-xl:    6px;
+  --radius-2xl:   8px;
+  --radius-pill:  9999px;
+
+  /* ── Innovation Line Heights ────────────────────── */
+  --innovation-line-height-thin:   4px;
+  --innovation-line-height-thick:  8px;
+}

@@ -1,0 +1,29 @@
+/**
+ * ACME Web Font Declarations — Inter (variable font)
+ *
+ * Primary: loaded from Google Fonts CDN (reliable in all preview contexts).
+ * Fallback @font-face: local Inter variable font files for offline/production use.
+ */
+
+/* CDN load — weights 100–900, normal + italic, optical sizing */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* Local fallback */
+@font-face {
+  font-family: 'Inter';
+  src: url('../assets/fonts/Inter-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../assets/fonts/Inter-Variable-Italic.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* JetBrains Mono — monospace for token labels and code references */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap');

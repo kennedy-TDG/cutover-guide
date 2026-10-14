@@ -1,0 +1,17 @@
+/**
+ * ACME Design System — Global Styles Entry Point
+ * ACME
+ *
+ * Import this single file in any consuming project to load all
+ * ACME design tokens and web fonts.
+ *
+ * Order: fonts first (async), then token layers.
+ */
+
+@import './tokens/fonts.css';
+@import './tokens/colors.css';
+@import './tokens/typography.css';
+@import './tokens/spacing.css';
+@import './tokens/shadows.css';
+@import './tokens/tables.css';
+@import './tokens/callouts.css';

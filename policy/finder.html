@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFDFB;font-family:Inter,system-ui,-apple-system,sans-serif;color:#2C2E31;-webkit-font-smoothing:antialiased}
+a{color:#326DC2;font-weight:600}
+a:hover{color:#1e5fd6}
+strong,b{font-weight:700}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@24,400,0..1,0">
+</helmet>
+
+<section data-screen-label="Combined Option" style="padding:56px 64px 48px;display:flex;flex-direction:column;gap:24px;">
+  <div id="9a" style="width:1280px;display:flex;flex-direction:column;gap:14px">
+    <div style="background:#fff;box-shadow:0 8px 40px rgba(16,32,58,.09);border-radius:4px;overflow:hidden">
+      <div style="background:#326DC2;display:flex;align-items:center;gap:16px;padding:16px 56px">
+        <svg role="img" aria-label="ACME" viewBox="0 0 132 36" style="height:36px;width:auto;display:block" xmlns="http://www.w3.org/2000/svg"><path d="M18 3 L33 32 H3 Z" fill="none" stroke="#fff" stroke-width="3.5" stroke-linejoin="round"/><path d="M11 24 H25" stroke="#fff" stroke-width="3"/><text x="44" y="27" fill="#fff" font-family="Inter,system-ui,sans-serif" font-size="23" font-weight="800" letter-spacing="2">ACME</text></svg>
+        <span style="width:1px;height:28px;background:rgba(255,255,255,.3)"></span>
+        <span style="font-size:17px;font-weight:700;color:#fff;flex:1">Time Off &amp; Pay Policies</span>
+        <a style="color:#fff;font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px;text-decoration:none"><span style="font-family:'Material Symbols Sharp';font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;font-size:20px;line-height:1;color:#fff;width:24px;flex-shrink:0;display:inline-flex;justify-content:center">print</span>Print</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);height:5px"><span style="background:#1F4A87"></span><span style="background:#78ACF9"></span><span style="background:#E1AD59"></span><span style="background:#C98A2E"></span></div>
+      <div style="padding:44px 56px 8px;font-size:23px;line-height:1.75;color:#141414;max-width:820px">I work at a site in <span style="color:#326DC2;font-weight:700;border-bottom:2px dotted #2C2E31">Colorado</span>. I’m paid <span style="color:#326DC2;font-weight:700;border-bottom:2px dotted #2C2E31">hourly</span>, work <span style="color:#326DC2;font-weight:700;border-bottom:2px dotted #2C2E31">full time</span>, and have been at ACME for <span style="color:#326DC2;font-weight:700;border-bottom:2px dotted #2C2E31">4 years</span>.</div>
+      <div style="display:grid;grid-template-columns:340px minmax(0,1fr);margin:32px 40px 44px;border:1px solid #d9e1e2;border-radius:4px;overflow:hidden;box-shadow:0 2px 4px rgba(16,32,58,.06),0 10px 28px rgba(16,32,58,.09)">
+        <div id="pf-side" style="background:#F8F9FA;border-right:1px solid #dddedf;padding:28px 0 40px 42px;display:flex;flex-direction:column"></div>
+        <div id="pf-main" style="display:grid;grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);gap:36px;padding:40px 48px 56px;align-items:start"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</x-dc>
+<script>
+(function () {
+  var C = { primary: '#326DC2', icon: '#1F4A87', num: '#2C2E31', muted: '#5F646A', here: '#9A6416', tintLine: '#F2E6D3' };
+  var P = [
+    { id: 'vacation', icon: 'beach_access', name: 'Vacation', value: '96 hrs',
+      intro: 'Your vacation steps up at each service milestone at ACME. At 4 years, you earn <b>96 hours a year</b>.',
+      rows: [['How you earn it', 'Added each pay period'], ['Most you can hold', '<n>144</n> hours'], ['Carries over', 'Up to <n>72</n> hours each plan year'], ['Borrow ahead', 'Up to <n>24</n> hours']],
+      note: 'Balances and carryover follow Colorado state rules.',
+      table: { title: 'Looking Ahead', cols: ['Years at ACME', 'Vacation Each Year'], here: 1,
+        rows: [['Less than 1 year', '<n>48</n> hours'], ['1 to 5 years', '<n>96</n> hours'], ['5 to 8 years', '<n>128</n> hours'], ['8 to 12 years', '<n>152</n> hours'], ['12 years or more', '<n>176</n> hours']] },
+      faq: [['How do I request vacation?', 'Submit a request in the time-off app at least two weeks ahead. Your manager approves it there.'],
+        ['Do holidays use my vacation hours?', 'No. Company holidays are paid separately and never come out of your vacation balance.'],
+        ['Can I cash out vacation hours?', 'Once a year, you can cash out up to 24 hours, as long as at least 40 hours stay in your balance.']] },
+    { id: 'holidays', icon: 'event', name: 'Holidays', value: '10 days',
+      intro: 'ACME gives you <b>10 paid holidays a year</b>: 8 company holidays plus 2 floating holidays you choose.',
+      rows: [['Company holidays', '<n>8</n> set dates'], ['Floating holidays', '<n>2</n> days you pick'], ['Request a floater', 'At least <n>1</n> week ahead'], ['If you work a holiday', 'Paid <n>1.5x</n> for hours worked']],
+      note: 'Floating holidays reset each January and don’t carry over.',
+      table: { title: 'Company Holiday Calendar', cols: ['Holiday', 'Observed'], here: -1,
+        rows: [['New Year’s Day', 'January 1'], ['Memorial Day', 'Last Monday in May'], ['Independence Day', 'July 4'], ['Labor Day', 'First Monday in September'], ['Thanksgiving', 'Fourth Thursday in November'], ['Day after Thanksgiving', 'Fourth Friday in November'], ['Christmas Eve', 'December 24'], ['Christmas Day', 'December 25']] },
+      faq: [['What if a holiday falls on a weekend?', 'Saturday holidays are observed the Friday before. Sunday holidays are observed the Monday after.'],
+        ['Do part-time team members get holiday pay?', 'Yes. Holiday pay is based on the hours you’re normally scheduled that day.'],
+        ['How should I use floating holidays?', 'Any way you like, such as a birthday or a cultural or religious day that matters to you.']] },
+    { id: 'sick', icon: 'medical_services', name: 'Sick Leave', value: '56 hrs',
+      intro: 'You earn sick leave as you work, up to <b>56 hours a year</b>, to care for yourself or your family.',
+      rows: [['How you earn it', '<n>1</n> hour for every <n>30</n> hours worked'], ['Most you can hold', '<n>80</n> hours'], ['Carries over', 'Up to <n>56</n> hours each January'], ['Use it for', 'Illness, care, or medical appointments']],
+      note: 'This policy meets or goes beyond Colorado paid sick leave rules.',
+      table: { title: 'When to Let Your Manager Know', cols: ['Situation', 'Notice Needed'], here: -1,
+        rows: [['Planned appointment', 'As soon as you book it'], ['Sudden illness', 'Before your shift starts'], ['Out 3+ shifts in a row', 'A doctor’s note may be requested']] },
+      faq: [['Do I need a doctor’s note?', 'Only if you’re out for more than 3 scheduled shifts in a row.'],
+        ['Is unused sick leave paid out when I leave?', 'No. But if you come back within 6 months, your balance is restored.'],
+        ['Can I use sick leave for mental health?', 'Yes. Mental health days count the same as any other illness.']] },
+    { id: 'overtime', icon: 'schedule', name: 'Overtime', value: 'Time + ½',
+      intro: 'As an hourly team member, you earn <b>1.5 times your regular rate</b> for overtime hours.',
+      rows: [['Weekly overtime', 'After <n>40</n> hours in a week'], ['Daily overtime', 'After <n>12</n> hours in a day'], ['Approval', 'Get your manager’s OK first'], ['Paid on', 'The paycheck for that pay period']],
+      note: 'Daily overtime after 12 hours follows Colorado rules.',
+      table: { title: 'How Hours Are Paid', cols: ['Hours Worked', 'Pay Rate'], here: -1,
+        rows: [['First 40 in a week', 'Regular rate'], ['Over 40 in a week', '<n>1.5x</n> rate'], ['Over 12 in one day', '<n>1.5x</n> rate'], ['On a company holiday', '<n>1.5x</n> rate + holiday pay']] },
+      faq: [['Does paid time off count toward overtime?', 'No. Only hours you actually work count toward the 40.'],
+        ['Can I trade overtime for time off later?', 'No. Overtime is always paid, never banked.'],
+        ['What if I’m asked to stay late?', 'Your manager approves it, and you’re paid for every minute.']] },
+    { id: 'meal', icon: 'restaurant', name: 'Meal Break', value: '45 min',
+      intro: 'When you work more than 5 hours, you get an <b>unpaid 45-minute meal break</b>, plus paid rest breaks.',
+      rows: [['Take it by', 'The end of your <n>5th</n> hour'], ['Meal break', '<n>45</n> minutes, unpaid'], ['Rest breaks', '<n>10</n> minutes paid per <n>4</n> hours'], ['Missed a break?', 'Tell your manager the same day']],
+      note: 'Rest breaks are required and can’t be skipped to leave early.',
+      table: { title: 'Breaks by Shift Length', cols: ['Shift Length', 'Breaks'], here: 1,
+        rows: [['Up to 5 hours', '<n>1</n> rest break'], ['5 to 8 hours', '<n>1</n> meal + <n>2</n> rest breaks'], ['8 to 10 hours', '<n>1</n> meal + <n>2</n> rest breaks'], ['10 to 12 hours', '<n>2</n> meals + <n>3</n> rest breaks']] },
+      faq: [['Can I skip my meal break to leave early?', 'No. Meal breaks must be taken so your shift ends on time.'],
+        ['What if I’m interrupted during my break?', 'Your break restarts, or the time is paid. Let your manager know.'],
+        ['Where can I take my break?', 'Anywhere you like. You’re free to leave the site.']] },
+    { id: 'premium', icon: 'payments', name: 'Premium Pay', value: 'Varies',
+      intro: 'Some shifts earn <b>extra pay on top of your regular rate</b>. Your site posts which premiums apply.',
+      rows: [['Evening shift', '+$<n>1.50</n>/hr after 6 p.m.'], ['Weekend shift', '+$<n>2.00</n>/hr'], ['On call', '$<n>3.00</n>/hr while on call'], ['Called in', 'At least <n>2</n> hours paid']],
+      note: 'Premiums count toward your overtime rate.',
+      table: { title: 'Premiums at a Glance', cols: ['Premium', 'Extra Pay'], here: -1,
+        rows: [['Evening', '+$<n>1.50</n>/hr'], ['Overnight', '+$<n>2.25</n>/hr'], ['Weekend', '+$<n>2.00</n>/hr'], ['Bilingual', '+$<n>1.00</n>/hr']] },
+      faq: [['How do I know which premiums my site offers?', 'Check your site’s posting board or your offer letter.'],
+        ['Can premiums stack?', 'Yes. Up to two premiums can apply to the same hour.'],
+        ['When do premiums show on my paycheck?', 'On the paycheck for the pay period you worked them.']] }
+  ];
+  var IC = "font-family:'Material Symbols Sharp';font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;line-height:1;flex-shrink:0;";
+  function n(t) { return t.replace(/<n>(.*?)<\/n>/g, '<span style="color:' + C.num + ';font-weight:800">$1</span>'); }
+  function side(cur) {
+    var h = '<span style="font-size:13px;font-weight:700;letter-spacing:.12em;color:#4b5563;padding:0 14px 8px">YOUR POLICIES</span>';
+    P.forEach(function (p) {
+      var on = p.id === cur;
+      h += '<button type="button" role="tab" aria-selected="' + on + '" data-pf="' + p.id + '" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:14px;padding:16px 14px;color:#141414;' +
+        (on ? 'background:#fff;margin-right:-1px;box-shadow:inset 3px 0 0 ' + C.primary + ';position:relative;' : '') + '">' +
+        '<span style="' + IC + 'font-size:24px;color:' + C.icon + ';width:28px;display:inline-flex;justify-content:center">' + p.icon + '</span>' +
+        '<span style="flex:1;font-size:16px;font-weight:' + (on ? 700 : 600) + '">' + p.name + '</span>' +
+        '<span style="font-size:16px;font-weight:800;color:' + (on ? C.num : C.muted) + '">' + p.value + '</span></button>';
+    });
+    return h;
+  }
+  function main(p) {
+    var card = 'background:#fff;border-radius:4px;border:1px solid #d9e1e2;box-shadow:0 1px 2px rgba(16,32,58,.05),0 4px 12px rgba(16,32,58,.05)';
+    var h = '<div style="display:flex;flex-direction:column;gap:24px"><div style="display:flex;flex-direction:column;gap:10px">' +
+      '<div style="display:flex;align-items:center;gap:12px"><span style="' + IC + 'font-size:34px;color:' + C.icon + '">' + p.icon + '</span><h3 style="margin:0;font-size:28px;font-weight:700;color:#141414;letter-spacing:-.01em">' + p.name + '</h3></div>' +
+      '<p style="margin:0;font-size:17px;line-height:1.6;color:#1f2a2c;max-width:58ch">' + p.intro + '</p></div>' +
+      '<div style="display:flex;flex-direction:column;padding:0 16px;' + card + '">';
+    p.rows.forEach(function (r, i) {
+      h += '<div style="display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;padding:18px 0;' + (i ? 'border-top:1px solid #e6eaeb' : '') + '"><span style="font-size:15px;color:#2b3436">' + r[0] + '</span><span style="font-size:16px;font-weight:600;color:#141414">' + n(r[1]) + '</span></div>';
+    });
+    h += '</div><div style="display:flex;align-items:flex-start;gap:8px;font-size:15px;line-height:1.55;color:#1f2a2c"><span style="' + IC + 'font-size:22px;color:#141414">location_on</span><span><b>Colorado:</b> ' + p.note + '</span></div>';
+    var t = p.table;
+    h += '<div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:18px;font-weight:700;color:#141414">' + t.title + '</span><div style="display:flex;flex-direction:column;overflow:hidden;' + card + '">' +
+      '<div style="display:grid;grid-template-columns:170px minmax(0,1fr) auto;gap:16px;padding:11px 12px;background:' + C.primary + '"><span style="font-size:14px;font-weight:700;color:#fff">' + t.cols[0] + '</span><span style="font-size:14px;font-weight:700;color:#fff">' + t.cols[1] + '</span><span></span></div>';
+    t.rows.forEach(function (r, i) {
+      var here = i === t.here;
+      h += '<div style="display:grid;grid-template-columns:170px minmax(0,1fr) auto;gap:16px;align-items:center;padding:12px;border-top:1px solid #e6eaeb"><span style="font-size:15px;' + (here ? 'font-weight:700;color:#141414' : 'color:#2b3436') + '">' + r[0] + '</span><span style="font-size:16px;font-weight:' + (here ? 700 : 600) + ';color:#141414">' + n(r[1]) + '</span>' +
+        (here ? '<span style="padding-right:8px;font-size:12px;font-weight:700;color:' + C.here + ';letter-spacing:.04em;white-space:nowrap">YOU ARE HERE</span>' : '<span></span>') + '</div>';
+    });
+    h += '</div></div></div>';
+    h += '<div style="display:flex;flex-direction:column;gap:16px;background:#FDF8F0;border-radius:4px;padding:24px"><div style="display:flex;align-items:center;gap:8px"><span style="' + IC + 'font-size:24px;color:' + C.icon + ';width:28px;display:inline-flex;justify-content:center">forum</span><span style="font-size:18px;font-weight:700;color:#141414">Common Questions</span></div>';
+    p.faq.forEach(function (q) {
+      h += '<div style="display:flex;flex-direction:column;gap:6px;padding-top:14px;border-top:1px solid ' + C.tintLine + '"><b style="font-size:15px;line-height:1.4;color:#2b3436">' + q[0] + '</b><span style="font-size:14.5px;line-height:1.55;color:#1f2a2c">' + q[1] + '</span></div>';
+    });
+    h += '<span style="font-size:14px;color:' + C.primary + ';font-weight:600">Still have questions? Ask your manager or HR partner.</span></div>';
+    return h;
+  }
+  function show(id) {
+    var s = document.getElementById('pf-side'), m = document.getElementById('pf-main');
+    if (!s || !m) return false;
+    var p = P.filter(function (x) { return x.id === id; })[0] || P[0];
+    s.innerHTML = side(p.id); m.innerHTML = main(p);
+    s.setAttribute('role', 'tablist');
+    return true;
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-pf]');
+    if (b) { show(b.getAttribute('data-pf')); var nb = document.querySelector('[data-pf="' + b.getAttribute('data-pf') + '"]'); if (nb) nb.focus(); }
+  });
+  var cur = (location.hash || '').slice(1) || 'vacation';
+  var _show = show; show = function (id) { cur = id; return _show(id); };
+  /* The page runtime re-renders its markup after load (and differently when framed), wiping what we inserted.
+     Re-fill whenever the containers exist but are empty. */
+  function fill() { var s = document.getElementById('pf-side'); if (s && !s.children.length) _show(cur); }
+  fill();
+  new MutationObserver(fill).observe(document.documentElement, { childList: true, subtree: true });
+  setInterval(fill, 400);
+})();
+</script>
+</body>
+</html>

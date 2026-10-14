@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/design-system/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/design-system/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/design-system/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/design-system/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/design-system/tokens/shadows.css">
+  <link rel="stylesheet" href="_ds/design-system/styles.css">
+  <script src="_ds/design-system/_ds_bundle.js"></script>
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+    a { color: #116a8a; text-decoration: none; }
+    a:hover { color: #0b5570; text-decoration: underline; }
+    @keyframes acmerise { 0% { opacity: 0; transform: translateY(18px); } 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes acmetip { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: none; } }
+    @keyframes acmeglow { 0% { box-shadow: 0 0 0 0 rgba(242,140,40,1), 0 0 12px 2px rgba(242,140,40,.6); } 70% { box-shadow: 0 0 0 16px rgba(242,140,40,0), 0 0 12px 2px rgba(242,140,40,.25); } 100% { box-shadow: 0 0 0 0 rgba(242,140,40,0), 0 0 12px 2px rgba(242,140,40,.6); } }
+    @keyframes acmeripple { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(2.6); opacity: 0; } }
+    @keyframes acmecard { 0% { opacity: 0; transform: translateY(6px); } 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes acmebob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    @keyframes acmefadein { 0% { opacity: 0; transform: translateY(-14px); } 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes acmefall { 0% { transform: translateY(-20px) rotate(0deg); opacity: 1; } 100% { transform: translateY(105vh) rotate(540deg); opacity: .9; } }
+  </style>
+</helmet>
+<div style="position:fixed;inset:0;display:flex;font-family:'Oracle Sans','Segoe UI Variable','Segoe UI',-apple-system,'Helvetica Neue',Arial,sans-serif;color:#161513;background:#fbf9f8;">
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column;position:relative;">
+
+    <div style="height:52px;flex:none;background:#312d2a;display:flex;align-items:center;padding:0 16px 0 14px;gap:14px;">
+      <div onClick="{{ notAvail }}" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:4px;" style-hover="background:rgba(255,255,255,.1);">
+        <svg sc-camel-view-box="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#fff;stroke-width:1.8;"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+      </div>
+      <img src="assets/oracle-wordmark.png" alt="Oracle" style="height:22px;width:auto;display:block;">
+      <div style="flex:1;"></div>
+      <div onClick="{{ goHome }}" data-tgt="top-home" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:4px;" style-hover="background:rgba(255,255,255,.1);">
+        <svg sc-camel-view-box="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#fff;stroke-width:1.5;"><path d="M3.5 11L12 3.5 20.5 11V20.5h-17z"></path></svg>
+      </div>
+      <sc-if value="{{ isHome }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;gap:14px;">
+          <div onClick="{{ notAvail }}" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:4px;" style-hover="background:rgba(255,255,255,.1);">
+            <svg sc-camel-view-box="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#fff;stroke-width:1.5;"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.8l-5.2 2.8 1-5.8-4.3-4.1 5.9-.8z"></path></svg>
+          </div>
+          <div onClick="{{ notAvail }}" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:4px;" style-hover="background:rgba(255,255,255,.1);">
+            <svg sc-camel-view-box="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#fff;stroke-width:1.5;"><path d="M5 21V4M5 4.5h13l-2.5 4.5L18 13.5H5"></path></svg>
+          </div>
+        </div>
+      </sc-if>
+      <div onClick="{{ notAvail }}" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:4px;" style-hover="background:rgba(255,255,255,.1);">
+        <svg sc-camel-view-box="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#fff;stroke-width:1.5;"><path d="M6 17V11a6 6 0 0112 0v6l1.5 1.5h-15zM10 20.5a2 2 0 004 0"></path></svg>
+      </div>
+      <div onClick="{{ notAvail }}" style="width:30px;height:30px;border-radius:4px;background:#fff;color:#312d2a;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-left:6px;">{{ initials }}</div>
+    </div>
+
+    <div ref="{{ mainRef }}" style="flex:1;min-height:0;overflow:auto;position:relative;">
+
+      <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+        <div style="min-height:100%;background:#fff;display:flex;flex-direction:column;">
+          <div style="background:#22656e;padding:38px 24px 0 20%;color:#fff;">
+            <div style="font-family:Georgia,'Times New Roman',serif;font-size:38px;line-height:1.2;">{{ greeting }}, {{ userName }}</div>
+            <div style="display:flex;align-items:center;margin-top:52px;max-width:1000px;">
+              <div data-tabs-row="1" style="flex:1;min-width:0;display:flex;gap:52px;border-bottom:2px solid rgba(255,255,255,.3);overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;white-space:nowrap;font-size:19px;">
+                <div onClick="{{ notAvail }}" style="padding-bottom:12px;cursor:pointer;opacity:.92;">Me</div>
+                <div onClick="{{ notAvail }}" style="padding-bottom:12px;cursor:pointer;opacity:.92;">Payables</div>
+                <div onClick="{{ notAvail }}" style="padding-bottom:12px;cursor:pointer;opacity:.92;">General Accounting</div>
+                <div onClick="{{ notAvail }}" style="padding-bottom:12px;cursor:pointer;opacity:.92;">Intercompany Accounting</div>
+                <div onClick="{{ actTabProc }}" data-tgt="tab-procurement" style="padding-bottom:10px;cursor:pointer;border-bottom:3px solid #fff;margin-bottom:-2px;">Procurement</div>
+                <div onClick="{{ notAvail }}" style="padding-bottom:12px;cursor:pointer;opacity:.92;">Tools</div>
+                <div onClick="{{ notAvail }}" style="padding-bottom:12px;cursor:pointer;opacity:.92;">Oracle Integration Cloud</div>
+              </div>
+              <svg sc-camel-view-box="0 0 24 24" style="width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2.2;margin-left:12px;"><path d="M9 6l6 6-6 6"></path></svg>
+            </div>
+            <div style="display:flex;gap:90px;margin-top:34px;flex-wrap:wrap;padding-bottom:40px;">
+              <div style="min-width:240px;">
+                <div style="font-size:13px;font-weight:700;letter-spacing:.02em;">QUICK ACTIONS</div>
+                <div style="display:flex;flex-direction:column;gap:30px;margin-top:40px;font-size:15px;">
+                  <div onClick="{{ notAvail }}" style="display:flex;align-items:center;gap:14px;cursor:pointer;">
+                    <svg sc-camel-view-box="0 0 24 24" style="width:26px;height:26px;fill:none;stroke:#fff;stroke-width:1.2;"><circle cx="12" cy="12" r="7"></circle><circle cx="12" cy="4.5" r="1.6"></circle><circle cx="19" cy="9" r="1.6"></circle><circle cx="17" cy="18" r="1.6"></circle><circle cx="7" cy="18" r="1.6"></circle><circle cx="5" cy="9" r="1.6"></circle></svg>Purchase Orders (New)</div>
+                  <div onClick="{{ notAvail }}" style="display:flex;align-items:center;gap:14px;cursor:pointer;">
+                    <svg sc-camel-view-box="0 0 24 24" style="width:26px;height:26px;fill:none;stroke:#fff;stroke-width:1.2;"><rect x="3" y="3" width="5" height="18"></rect><rect x="9.5" y="3" width="5" height="18"></rect><rect x="16" y="3" width="5" height="18"></rect><path d="M4.5 6h2M11 6h2M17.5 6h2M4.5 17h2M11 17h2M17.5 17h2"></path></svg>Purchase Agreements (New)</div>
+                  <div onClick="{{ notAvail }}" style="display:flex;align-items:center;gap:14px;cursor:pointer;">
+                    <svg sc-camel-view-box="0 0 24 24" style="width:26px;height:26px;fill:none;stroke:#fff;stroke-width:1.2;"><rect x="3" y="3" width="5" height="18"></rect><rect x="9.5" y="3" width="5" height="18"></rect><rect x="16" y="3" width="5" height="18"></rect><path d="M4.5 6h2M11 6h2M17.5 6h2M4.5 17h2M11 17h2M17.5 17h2"></path></svg>Purchase Agreements</div>
+                </div>
+                <div onClick="{{ notAvail }}" style="margin-top:56px;font-size:15px;cursor:pointer;">Show More</div>
+              </div>
+              <div>
+                <div style="font-size:13px;font-weight:700;letter-spacing:.02em;">APPS</div>
+                <div style="display:flex;gap:11px;margin-top:28px;align-items:center;flex-wrap:wrap;">
+                  <div onClick="{{ notAvailOld }}" style="width:154px;height:154px;border-radius:6px;background:rgba(255,255,255,.13);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;text-align:center;font-size:15px;line-height:1.2;" style-hover="background:rgba(255,255,255,.2);">
+                    <svg sc-camel-view-box="0 0 48 48" style="width:46px;height:46px;fill:none;stroke:#fff;stroke-width:1.6;"><path d="M3 7h6l5 24h24l5-17H11M18 14v13M24 14v13M30 14v13M36 14v13M12 20h29"></path><circle cx="17" cy="38" r="3"></circle><circle cx="35" cy="38" r="3"></circle></svg>
+                    <div>Purchase<br>Requisitions</div>
+                  </div>
+                  <div onClick="{{ actTilePrNew }}" data-tgt="tile-prnew" style="width:154px;height:154px;border-radius:6px;background:rgba(255,255,255,.13);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;text-align:center;font-size:15px;line-height:1.2;" style-hover="background:rgba(255,255,255,.2);">
+                    <svg sc-camel-view-box="0 0 48 48" style="width:46px;height:46px;fill:none;stroke:#fff;stroke-width:1.6;"><path d="M3 7h6l5 24h24l5-17H11M18 14v13M24 14v13M30 14v13M36 14v13M12 20h29"></path><circle cx="17" cy="38" r="3"></circle><circle cx="35" cy="38" r="3"></circle></svg>
+                    <div>Purchase<br>Requisitions<br>(New)</div>
+                  </div>
+                  <div onClick="{{ notAvail }}" style="width:154px;height:154px;border-radius:6px;background:rgba(255,255,255,.13);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;text-align:center;font-size:15px;line-height:1.2;" style-hover="background:rgba(255,255,255,.2);">
+                    <svg sc-camel-view-box="0 0 48 48" style="width:46px;height:46px;fill:none;stroke:#fff;stroke-width:1.6;"><path d="M14 9h18l6 6v28H14zM10 5h18M10 5v34"></path><path d="M19 20h14M19 25h14M19 30h14M19 35h10"></path></svg>
+                    <div>Purchase Orders</div>
+                  </div>
+                  <div onClick="{{ notAvail }}" style="width:154px;height:154px;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                    <svg sc-camel-view-box="0 0 24 24" style="width:40px;height:40px;fill:none;stroke:#fff;stroke-width:1.2;"><path d="M12 3v18M3 12h18"></path></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="font-size:24px;margin-top:10px;">Things to Finish</div>
+            <div style="display:flex;gap:11px;margin-top:20px;transform:translateY(40px);">
+              <div onClick="{{ notAvail }}" style="width:240px;height:130px;background:#fff;border-radius:6px 6px 0 0;box-shadow:0 1px 4px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;color:#4f4b47;font-size:15px;cursor:pointer;">Assigned to Me</div>
+              <div style="flex:1;max-width:740px;height:130px;background:#fff;border-radius:6px 6px 0 0;box-shadow:0 1px 4px rgba(0,0,0,.15);"></div>
+            </div>
+          </div>
+          <div style="flex:1;min-height:120px;background:#fff;"></div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isSsp }}">
+        <div style="min-height:100%;background:#fbf9f8;">
+          <div style="background:#315357;padding:22px 50px 22px;color:#fff;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;">
+              <div data-tgt="ssp-title">
+                <div style="font-size:32px;font-weight:700;line-height:1.2;">Self Service Procurement</div>
+                <div style="font-size:15px;font-weight:600;margin-top:4px;">ACME US BU | {{ loc }}</div>
+              </div>
+              <div style="display:flex;gap:24px;align-items:center;">
+                <div style="position:relative;"><div onClick="{{ toggleSspMenu }}" data-tgt="ssp-more" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:4px;" style-hover="background:rgba(255,255,255,.12);">
+                  <svg sc-camel-view-box="0 0 24 24" style="width:22px;height:22px;fill:#fff;"><circle cx="5" cy="12" r="1.7"></circle><circle cx="12" cy="12" r="1.7"></circle><circle cx="19" cy="12" r="1.7"></circle></svg>
+                </div>
+                <sc-if value="{{ sspMenu }}">
+                  <div style="position:absolute;top:44px;right:0;width:220px;background:#fff;border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,.22);padding:8px 0;z-index:16;color:#161513;font-size:17px;font-weight:400;">
+                    <div onClick="{{ goLists }}" data-tgt="menu-lists" style="padding:13px 16px;cursor:pointer;" style-hover="background:#f1efed;">Shopping Lists</div>
+                    <div onClick="{{ notAvail }}" style="padding:13px 16px;cursor:pointer;" style-hover="background:#f1efed;">Recent Searches</div>
+                  </div>
+                </sc-if></div>
+                <div onClick="{{ openPrefs }}" data-tgt="btn-prefs" style="height:38px;padding:0 17px;border:1px solid rgba(255,255,255,.75);border-radius:4px;display:flex;align-items:center;gap:9px;font-size:16px;font-weight:600;cursor:pointer;" style-hover="background:rgba(255,255,255,.1);">
+                  <svg sc-camel-view-box="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:#fff;stroke-width:1.6;"><circle cx="12" cy="12" r="3"></circle><path d="M12 2.5l1.6 2.6 3-.6.7 3 2.7 1.5-1.2 2.9 1.2 2.9-2.7 1.5-.7 3-3-.6L12 21.5l-1.6-2.6-3 .6-.7-3-2.7-1.5L5.2 12 4 9.1l2.7-1.5.7-3 3 .6z"></path></svg>Preferences</div>
+              </div>
+            </div>
+            <div style="position:relative;max-width:1028px;margin-top:16px;" data-tgt="search">
+              <div style="height:46px;border:1px solid rgba(255,255,255,.6);border-radius:4px;display:flex;align-items:center;gap:16px;padding:0 16px;box-sizing:border-box;">
+                <svg sc-camel-view-box="0 0 24 24" style="width:22px;height:22px;flex:none;fill:none;stroke:#fff;stroke-width:1.8;"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5L21 21"></path></svg>
+                <input value="{{ searchQ }}" onChange="{{ onSearch }}" onFocus="{{ searchFocusOn }}" onBlur="{{ searchFocusOff }}" onKeyDown="{{ searchKey }}" placeholder="Search for items or services" style="flex:1;background:transparent;border:none;outline:none;color:#fff;font-size:17px;font-family:inherit;padding:0 0 0 8px;">
+              </div>
+              <sc-if value="{{ showSugg }}">
+                <div style="position:absolute;left:0;right:0;top:50px;background:#fff;border-radius:4px;box-shadow:0 6px 18px rgba(0,0,0,.22);z-index:15;padding:6px 0;color:#161513;">
+                  <sc-for list="{{ sugg }}" as="sg" hint-placeholder-count="3">
+                    <div onMouseDown="{{ sg.pick }}" style="display:flex;align-items:center;gap:16px;padding:11px 18px;font-size:15px;cursor:pointer;" style-hover="background:#f1efed;">
+                      <sc-if value="{{ sg.recent }}"><svg sc-camel-view-box="0 0 24 24" style="width:18px;height:18px;flex:none;fill:none;stroke:#161513;stroke-width:1.6;"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7v5l3.5 2"></path></svg></sc-if>
+                      <sc-if value="{{ sg.predict }}"><svg sc-camel-view-box="0 0 24 24" style="width:18px;height:18px;flex:none;fill:none;stroke:#161513;stroke-width:1.8;"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5L21 21"></path></svg></sc-if>
+                      <div><span>{{ sg.pre }}</span><span style="font-weight:700;">{{ sg.match }}</span><span>{{ sg.post }}</span></div>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+          <div style="height:14px;background:url(assets/pattern-strip.png) repeat-x left top / auto 14px;"></div>
+          <div style="padding:42px 50px 110px;max-width:1540px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div onClick="{{ toggleNews }}" style="cursor:pointer;display:flex;">
+                <svg sc-camel-view-box="0 0 24 24" style="{{ newsChevron }}"><path d="M6 9l6 6 6-6"></path></svg>
+              </div>
+              <div style="font-size:23px;font-weight:700;">Purchasing news</div>
+              <div onClick="{{ notAvail }}" style="cursor:pointer;display:flex;">
+                <svg sc-camel-view-box="0 0 24 24" style="width:22px;height:22px;fill:none;stroke:#161513;stroke-width:1.7;"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"></path></svg>
+              </div>
+            </div>
+            <sc-if value="{{ newsOpen }}" hint-placeholder-val="{{ true }}">
+              <div style="margin-top:22px;background:#fff;border:1px solid #dedad6;border-radius:6px;padding:20px 17px;min-height:250px;display:flex;flex-direction:column;gap:20px;align-items:flex-start;font-size:17px;">
+                <a onClick="{{ notAvail }}" style="cursor:pointer;">Where and When to Shop</a>
+                <a onClick="{{ notAvail }}" style="cursor:pointer;">Procurement Newsletter - Spring Edition</a>
+                <a onClick="{{ notAvail }}" style="cursor:pointer;">Preferred Partners Reference Guide</a>
+                <a onClick="{{ notAvail }}" style="cursor:pointer;">NEW Preferred Office Furniture Supplier</a>
+              </div>
+            </sc-if>
+            <div style="font-size:20px;font-weight:700;margin-top:62px;">Shop by category</div>
+            <a onClick="{{ notAvail }}" style="display:inline-block;margin-top:16px;font-size:16px;cursor:pointer;">Browse all</a>
+            <div onClick="{{ notAvail }}" style="margin-top:22px;width:320px;max-width:100%;height:86px;box-sizing:border-box;background:#fff;border:1px solid #dedad6;border-radius:4px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;cursor:pointer;" style-hover="box-shadow:0 2px 8px rgba(0,0,0,.1);">
+              <div style="font-size:17px;font-weight:700;">Punchout Categories</div>
+              <svg sc-camel-view-box="0 0 48 48" style="width:28px;height:28px;fill:none;stroke:#3b3733;stroke-width:2.2;"><path d="M3 7h6l5 24h24l5-17H11M18 14v13M24 14v13M30 14v13M36 14v13M12 20h29"></path><circle cx="17" cy="38" r="3"></circle><circle cx="35" cy="38" r="3"></circle></svg>
+            </div>
+            <div onClick="{{ actNcr }}" data-tgt="btn-ncr" style="margin-top:75px;width:max-content;height:40px;padding:0 36px;box-sizing:border-box;border:1px solid #8d8883;border-radius:4px;display:flex;align-items:center;font-size:14px;font-weight:600;cursor:pointer;" style-hover="background:#f1efed;">Create Noncatalog Request</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isNcr }}">
+        <div style="position:relative;min-height:100%;background:#efedeb;">
+          <div style="position:absolute;left:0;right:0;top:0;height:212px;background:#315357;"></div>
+          <div style="position:relative;max-width:1480px;margin:0 auto;padding:0 3vw 70px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 50px 20px;flex-wrap:wrap;">
+              <div style="font-size:32px;font-weight:700;color:#fff;">Create Noncatalog Request</div>
+              <div style="display:flex;gap:16px;">
+                <div onClick="{{ ncrCancel }}" style="height:38px;padding:0 16px;border:1px solid rgba(255,255,255,.75);border-radius:4px;display:flex;align-items:center;color:#fff;font-size:16px;font-weight:600;cursor:pointer;white-space:nowrap;flex:none;" style-hover="background:rgba(255,255,255,.1);">Cancel</div>
+                <sc-if value="{{ notAdded }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:flex;gap:16px;">
+                    <div onClick="{{ notAvail }}" style="height:38px;padding:0 16px;border:1px solid rgba(255,255,255,.75);border-radius:4px;display:flex;align-items:center;color:#fff;font-size:16px;font-weight:600;cursor:pointer;white-space:nowrap;flex:none;" style-hover="background:rgba(255,255,255,.1);">Add to List</div>
+                    <div onClick="{{ actAddCart }}" data-tgt="btn-addcart" style="height:38px;padding:0 16px;border:1px solid #fff;background:#fff;border-radius:4px;display:flex;align-items:center;color:#161513;font-size:16px;font-weight:600;cursor:pointer;white-space:nowrap;flex:none;" style-hover="background:#ebe8e5;">Add to Cart</div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ added }}">
+                  <div style="display:flex;gap:16px;">
+                    <div style="height:38px;padding:0 16px;border:1px solid rgba(255,255,255,.25);border-radius:4px;display:flex;align-items:center;color:rgba(255,255,255,.4);font-size:16px;font-weight:600;white-space:nowrap;flex:none;">Add to List</div>
+                    <div style="height:38px;padding:0 16px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.12);border-radius:4px;display:flex;align-items:center;color:rgba(255,255,255,.4);font-size:16px;font-weight:600;white-space:nowrap;flex:none;">Add to Cart</div>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+            <div style="background:#fbf9f8;box-shadow:0 1px 4px rgba(0,0,0,.12);border-radius:6px 6px 0 0;overflow:hidden;">
+              <div style="height:14px;background:url(assets/pattern-strip.png) repeat-x left top / auto 14px;"></div>
+              <div style="padding:62px 50px 90px;max-width:952px;">
+                <dc-import name="OField" label="Item Description" kind="textarea" height="128" required="{{ true }}" value="{{ f.desc }}" on-change="{{ set.desc }}" tgt="f-desc" hint-size="100%,150px"></dc-import>
+                <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 26px;align-items:start;margin-top:16px;">
+                  <dc-import name="OField" label="Item Type" kind="select" value="{{ f.itemType }}" options="{{ opt.itemType }}" on-change="{{ set.itemType }}" hint-size="100%,54px"></dc-import>
+                  <dc-import name="OField" label="Category" kind="select" required="{{ true }}" value="{{ f.category }}" options="{{ opt.category }}" on-change="{{ set.category }}" tgt="f-cat" hint-size="100%,54px"></dc-import>
+                </div>
+                <div style="font-size:24px;font-weight:700;margin:56px 0 24px;">Pricing</div>
+                <div data-tgt="pricing" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 26px;align-items:start;">
+                  <dc-import name="OField" label="Quantity" value="{{ f.qty }}" on-change="{{ set.qty }}" hint-size="100%,54px"></dc-import>
+                  <dc-import name="OField" label="UOM" kind="select" required="{{ true }}" value="{{ f.uom }}" options="{{ opt.uom }}" on-change="{{ set.uom }}" hint-size="100%,54px"></dc-import>
+                  <dc-import name="OField" label="Price" prefix="$" required="{{ true }}" value="{{ f.price }}" on-change="{{ set.price }}" hint-size="100%,54px"></dc-import>
+                  <dc-import name="OField" label="Currency" kind="select" value="{{ f.currency }}" options="{{ opt.currency }}" on-change="{{ set.currency }}" hint-size="100%,54px"></dc-import>
+                </div>
+                <div onClick="{{ tg.negotiated }}" data-tgt="f-neg" style="display:flex;align-items:center;gap:12px;cursor:pointer;font-size:17px;width:max-content;margin-top:26px;">
+                  <div style="{{ cb.negotiated }}"><sc-if value="{{ f.negotiated }}"><svg sc-camel-view-box="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:#fff;stroke-width:3;"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if></div>Negotiated</div>
+                <div data-tgt="source">
+                  <div style="font-size:24px;font-weight:700;margin:56px 0 30px;">Source</div>
+                  <div onClick="{{ tg.newSupplier }}" style="display:flex;align-items:center;gap:12px;cursor:pointer;font-size:17px;width:max-content;margin-bottom:18px;">
+                    <div style="{{ cb.newSupplier }}"><sc-if value="{{ f.newSupplier }}"><svg sc-camel-view-box="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:#fff;stroke-width:3;"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if></div>New supplier</div>
+                  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 26px;align-items:start;">
+                    <dc-import name="OField" label="Supplier" kind="select" value="{{ f.supplier }}" options="{{ opt.supplier }}" on-change="{{ set.supplier }}" hint-size="100%,54px"></dc-import>
+                    <dc-import name="OField" label="Supplier Site" tone="muted" value="{{ f.site }}" on-change="{{ set.site }}" hint-size="100%,54px"></dc-import>
+                    <dc-import name="OField" label="Supplier Contact" tone="muted" value="{{ f.contact }}" on-change="{{ set.contact }}" hint-size="100%,54px"></dc-import>
+                    <dc-import name="OField" label="Additional Contact Email" tone="muted" value="{{ f.email }}" on-change="{{ set.email }}" hint-size="100%,54px"></dc-import>
+                    <dc-import name="OField" label="Supplier Item" tone="muted" value="{{ f.supItem }}" on-change="{{ set.supItem }}" hint-size="100%,54px"></dc-import>
+                  </div>
+                </div>
+                <div data-tgt="mfr">
+                  <div style="font-size:24px;font-weight:700;margin:56px 0 30px;">Manufacturer</div>
+                  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 26px;align-items:start;">
+                    <dc-import name="OField" label="Manufacturer" value="{{ f.mfr }}" on-change="{{ set.mfr }}" hint-size="100%,54px"></dc-import>
+                    <dc-import name="OField" label="Manufacturer Part Number" value="{{ f.mfrPart }}" on-change="{{ set.mfrPart }}" hint-size="100%,54px"></dc-import>
+                  </div>
+                </div>
+                <div style="font-size:24px;font-weight:700;margin:56px 0 0;">Additional information</div>
+                <div style="font-size:24px;font-weight:700;margin:56px 0 30px;">Notes</div>
+                <dc-import name="OField" label="Note to Supplier" kind="textarea" height="110" value="{{ f.note }}" on-change="{{ set.note }}" tgt="f-note" hint-size="100%,110px"></dc-import>
+                <div data-tgt="attach">
+                  <div style="font-size:24px;font-weight:700;margin:56px 0 30px;">Attachments</div>
+                  <dc-import name="OField" label="Category" kind="select" value="{{ f.attCat }}" options="{{ opt.attCat }}" on-change="{{ set.attCat }}" tgt="f-attcat" hint-size="100%,56px"></dc-import>
+                  <div onClick="{{ actDrop }}" data-tgt="dropzone" style="margin-top:9px;height:105px;box-sizing:border-box;border:1px dashed #8d8883;border-radius:4px;padding:26px 26px;cursor:pointer;background:#fff;" style-hover="background:#f7f5f3;">
+                    <div style="font-size:21px;font-weight:700;">Drag and Drop</div>
+                    <div style="font-size:15px;color:#4f4b47;margin-top:6px;">Select or drop files here.</div>
+                  </div>
+                  <sc-for list="{{ files }}" as="fl" hint-placeholder-count="0">
+                    <div style="display:flex;align-items:center;gap:14px;padding:14px 4px;border-bottom:1px solid #e3dfdb;font-size:15px;">
+                      <svg sc-camel-view-box="0 0 24 24" style="width:20px;height:20px;flex:none;fill:none;stroke:#3b3733;stroke-width:1.5;"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 12h6M9 15.5h6"></path></svg>
+                      <div style="flex:1;min-width:0;"><div style="font-size:12px;color:#5b5652;">{{ fl.cat }}</div><div>{{ fl.name }}</div></div>
+                      <div onClick="{{ fl.remove }}" style="cursor:pointer;display:flex;"><svg sc-camel-view-box="0 0 24 24" style="width:18px;height:18px;fill:none;stroke:#3b3733;stroke-width:1.8;"><path d="M6 6l12 12M18 6L6 18"></path></svg></div>
+                    </div>
+                  </sc-for>
+                  <div style="display:flex;gap:9px;margin-top:9px;">
+                    <div style="flex:1;min-width:0;"><dc-import name="OField" label="URL" value="{{ f.url }}" on-change="{{ set.url }}" hint-size="100%,56px"></dc-import></div>
+                    <div onClick="{{ addUrl }}" style="height:56px;padding:0 26px;box-sizing:border-box;border:1px solid #8d8883;border-radius:4px;display:flex;align-items:center;font-size:15px;font-weight:600;cursor:pointer;background:#fbf9f8;" style-hover="background:#f1efed;">Add URL</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isCart }}">
+        <div style="min-height:100%;background:#fbf9f8;">
+          <div style="background:#315357;padding:22px 44px 22px;color:#fff;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;">
+            <div>
+              <div style="font-size:32px;font-weight:700;line-height:1.2;">Cart</div>
+              <div style="font-size:15px;font-weight:600;margin-top:4px;">Requisition {{ reqNum }}</div>
+            </div>
+            <div style="display:flex;gap:20px;align-items:center;position:relative;">
+              <div onClick="{{ actMore }}" data-tgt="btn-more" style="{{ moreBtnStyle }}" style-hover="background:rgba(255,255,255,.15);">
+                <svg sc-camel-view-box="0 0 24 24" style="width:22px;height:22px;fill:#fff;"><circle cx="5" cy="12" r="1.7"></circle><circle cx="12" cy="12" r="1.7"></circle><circle cx="19" cy="12" r="1.7"></circle></svg>
+              </div>
+              <div onClick="{{ actSubmit }}" data-tgt="btn-submit" style="height:38px;padding:0 17px;border:1px solid #fff;background:#fff;border-radius:4px;display:flex;align-items:center;color:#161513;font-size:16px;font-weight:600;cursor:pointer;white-space:nowrap;flex:none;" style-hover="background:#ebe8e5;">Submit</div>
+              <sc-if value="{{ menuOpen }}">
+                <div style="position:absolute;top:46px;right:76px;width:200px;background:#fff;border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,.22);padding:8px 0;z-index:16;color:#161513;font-size:17px;">
+                  <div onClick="{{ goApprovers }}" data-tgt="menu-approvers" style="padding:13px 16px;cursor:pointer;" style-hover="background:#f1efed;">View Approvers</div>
+                  <div onClick="{{ notAvail }}" style="padding:13px 16px;cursor:pointer;" style-hover="background:#f1efed;">View PDF</div>
+                  <div onClick="{{ saveLater }}" data-tgt="menu-save" style="padding:13px 16px;cursor:pointer;" style-hover="background:#f1efed;">Save for Later</div>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+          <div style="height:14px;background:url(assets/pattern-strip.png) repeat-x left top / auto 14px;"></div>
+          <div style="padding:52px 44px 110px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div style="font-size:22px;font-weight:700;">Requisition summary</div>
+              <div onClick="{{ actEditSum }}" data-tgt="btn-editsum" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:4px;" style-hover="background:#efedeb;">
+                <svg sc-camel-view-box="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#161513;stroke-width:1.5;"><path d="M4 20l1-4.5L16.5 4l3.5 3.5L8.5 19zM14.5 6l3.5 3.5"></path></svg>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px 30px;margin-top:22px;">
+              <div><div style="font-size:13px;font-weight:500;color:#4f4b47;">Description</div><div style="font-size:17px;margin-top:3px;">{{ req.desc }}</div></div>
+              <div></div>
+              <div><div style="font-size:13px;font-weight:500;color:#4f4b47;">Justification</div><div style="font-size:17px;margin-top:3px;">{{ req.justification }}</div></div>
+              <div><div style="font-size:13px;font-weight:500;color:#4f4b47;">Subtotal</div><div style="font-size:17px;margin-top:3px;">{{ subtotal }}</div></div>
+              <div><div style="font-size:13px;font-weight:500;color:#4f4b47;">Nonrecoverable Tax</div><div style="font-size:17px;margin-top:3px;color:#c4260b;">Tax not calculated</div></div>
+              <div><div style="font-size:13px;font-weight:500;color:#4f4b47;">Approval Amount</div><div style="font-size:17px;margin-top:3px;">--</div></div>
+            </div>
+            <div onClick="{{ toggleMoreInfo }}" style="display:flex;align-items:center;gap:12px;margin-top:34px;cursor:pointer;width:max-content;">
+              <svg sc-camel-view-box="0 0 24 24" style="{{ moreInfoChevron }}"><path d="M9 6l6 6-6 6"></path></svg>
+              <div style="font-size:22px;font-weight:700;">More information</div>
+            </div>
+            <sc-if value="{{ moreInfoOpen }}">
+              <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;margin-top:20px;">
+                <div><div style="font-size:13px;font-weight:500;color:#4f4b47;">Deliver to Location</div><div style="font-size:17px;margin-top:3px;">{{ req.loc }}</div></div>
+                <div><div style="font-size:13px;font-weight:500;color:#4f4b47;">Charge To</div><div style="font-size:17px;margin-top:3px;color:#c4260b;">{{ chargeText }}</div></div>
+              </div>
+            </sc-if>
+            <div style="margin-top:30px;width:507px;max-width:100%;height:46px;box-sizing:border-box;border:1px solid #8d8883;border-radius:4px;display:flex;align-items:center;gap:14px;padding:0 16px;background:#fff;">
+              <svg sc-camel-view-box="0 0 24 24" style="width:22px;height:22px;flex:none;fill:none;stroke:#161513;stroke-width:1.8;"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5L21 21"></path></svg>
+              <input placeholder="Search for lines by description, category, or source" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-size:17px;font-family:inherit;color:#161513;">
+            </div>
+            <div data-tgt="lines" style="margin-top:22px;">
+              <div style="display:flex;align-items:center;gap:17px;">
+                <div onClick="{{ actDuplicate }}" data-tgt="btn-dup" style="{{ tbBtn }}">Duplicate</div>
+                <div onClick="{{ notAvailIfSel }}" style="{{ tbBtn }}">Edit Multiple</div>
+                <div onClick="{{ deleteSel }}" style="{{ tbIcon }}">
+                  <svg sc-camel-view-box="0 0 24 24" style="{{ trashStyle }}"><path d="M4 6.5h16M9 6.5V4h6v2.5M6 6.5l1 14h10l1-14M10 10v7M14 10v7"></path></svg>
+                </div>
+                <div style="flex:1;"></div>
+                <div onClick="{{ notAvail }}" style="width:38px;height:38px;box-sizing:border-box;border:1px solid #8d8883;border-radius:4px;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                  <svg sc-camel-view-box="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:#161513;stroke-width:1.6;"><rect x="4" y="4" width="16" height="16" rx="1"></rect><path d="M12 4v16"></path></svg>
+                </div>
+              </div>
+              <div style="overflow-x:auto;margin-top:12px;">
+                <div style="min-width:1300px;">
+                  <div style="display:grid;grid-template-columns:44px 84px minmax(150px,1.6fr) minmax(90px,1fr) minmax(130px,1.2fr) 130px 90px minmax(110px,1fr) minmax(130px,1.2fr) minmax(110px,1fr) 64px 80px;align-items:center;min-height:56px;font-size:17px;font-weight:600;border-bottom:1px solid #e3dfdb;">
+                    <div onClick="{{ toggleAll }}" style="cursor:pointer;display:flex;padding-left:12px;"><div style="{{ cbAll }}"><sc-if value="{{ allSel }}"><svg sc-camel-view-box="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:#fff;stroke-width:3;"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if></div></div>
+                    <div style="display:flex;align-items:center;gap:8px;">Line<svg sc-camel-view-box="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:#161513;stroke-width:1.8;"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"></path></svg></div>
+                    <div style="display:flex;align-items:center;gap:8px;">Description<svg sc-camel-view-box="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:#161513;stroke-width:1.8;"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"></path></svg></div>
+                    <div style="display:flex;align-items:center;gap:8px;">Category<svg sc-camel-view-box="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:#161513;stroke-width:1.8;"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"></path></svg></div>
+                    <div>Source</div>
+                    <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;padding-right:12px;">Quantity<svg sc-camel-view-box="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:#161513;stroke-width:1.8;"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"></path></svg></div>
+                    <div style="display:flex;align-items:center;gap:8px;">UOM<svg sc-camel-view-box="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:#161513;stroke-width:1.8;"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"></path></svg></div>
+                    <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;padding-right:16px;">Price<svg sc-camel-view-box="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:#161513;stroke-width:1.8;"><path d="M8 9l4-4 4 4M8 15l4 4 4-4"></path></svg></div>
+                    <div style="text-align:right;padding-right:16px;">Amount</div>
+                    <div style="text-align:right;padding-right:12px;line-height:1.2;">Amount<br>(USD)</div>
+                    <div style="text-align:center;">Edit</div>
+                    <div style="text-align:center;">Delivery</div>
+                  </div>
+                  <sc-for list="{{ lines }}" as="ln" hint-placeholder-count="1">
+                    <div style="{{ ln.rowStyle }}">
+                      <div onClick="{{ ln.toggle }}" style="cursor:pointer;display:flex;padding-left:12px;"><div style="{{ ln.cb }}"><sc-if value="{{ ln.sel }}"><svg sc-camel-view-box="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:#fff;stroke-width:3;"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if></div></div>
+                      <div>{{ ln.line }}</div>
+                      <div style="white-space:nowrap;overflow:hidden;padding-right:12px;">{{ ln.desc }}</div>
+                      <div style="white-space:nowrap;overflow:hidden;padding-right:12px;">{{ ln.category }}</div>
+                      <div style="white-space:nowrap;overflow:hidden;padding-right:12px;">{{ ln.source }}</div>
+                      <div style="display:flex;justify-content:flex-end;padding-right:12px;"><input value="{{ ln.qty }}" onChange="{{ ln.onQty }}" style="width:100px;height:44px;box-sizing:border-box;border:1px solid #8d8883;border-radius:4px;text-align:right;padding:0 14px;font-size:17px;font-family:inherit;background:#fff;color:#161513;"></div>
+                      <div>{{ ln.uom }}</div>
+                      <div style="text-align:right;padding-right:16px;">{{ ln.priceStr }}</div>
+                      <div style="text-align:right;padding-right:16px;">{{ ln.amountStr }}</div>
+                      <div style="text-align:right;padding-right:12px;">{{ ln.amountUsd }}</div>
+                      <div style="display:flex;justify-content:center;"><div onClick="{{ ln.edit }}" data-tgt="{{ ln.editTgt }}" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:4px;" style-hover="background:#efedeb;"><svg sc-camel-view-box="0 0 24 24" style="width:22px;height:22px;fill:none;stroke:#161513;stroke-width:1.5;"><path d="M4 20l1-4.5L16.5 4l3.5 3.5L8.5 19zM14.5 6l3.5 3.5"></path></svg></div></div>
+                      <div style="display:flex;justify-content:center;"><div onClick="{{ ln.delivery }}" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:4px;" style-hover="background:#efedeb;"><svg sc-camel-view-box="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#161513;stroke-width:1.5;"><path d="M3 6h11v10H3zM14 9.5h4l3 3.5v3h-7"></path><circle cx="7" cy="18" r="1.8"></circle><circle cx="17.5" cy="18" r="1.8"></circle></svg></div></div>
+                    </div>
+                  </sc-for>
+                  <sc-if value="{{ noLines }}">
+                    <div style="padding:30px 12px;font-size:17px;color:#4f4b47;border-bottom:1px solid #e3dfdb;">No data to display.</div>
+                  </sc-if>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isEditReq }}">
+        <div style="position:relative;min-height:100%;background:#efedeb;">
+          <div style="position:absolute;left:0;right:0;top:0;height:222px;background:#315357;"></div>
+          <div style="position:relative;max-width:1480px;margin:0 auto;padding:0 3vw 70px;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:20px 50px 20px;">
+              <div style="color:#fff;"><div style="font-size:32px;font-weight:700;line-height:1.2;">{{ reqNum }}</div><div style="font-size:15px;font-weight:600;margin-top:4px;">Requisition</div></div>
+              <div style="display:flex;gap:16px;">
+                <div onClick="{{ goCart }}" style="height:38px;padding:0 16px;border:1px solid rgba(255,255,255,.75);border-radius:4px;display:flex;align-items:center;color:#fff;font-size:16px;font-weight:600;cursor:pointer;white-space:nowrap;flex:none;" style-hover="background:rgba(255,255,255,.1);">Cancel</div>
+                <div onClick="{{ actUpdate }}" data-tgt="btn-update" style="height:38px;padding:0 17px;border:1px solid #fff;background:#fff;border-radius:4px;display:flex;align-items:center;color:#161513;font-size:16px;font-weight:600;cursor:pointer;white-space:nowrap;flex:none;" style-hover="background:#ebe8e5;">Update</div>
+              </div>
+            </div>
+            <div style="background:#fcf9f8;box-shadow:0 1px 4px rgba(0,0,0,.12);border-radius:6px 6px 0 0;overflow:hidden;">
+              <div style="height:14px;background:url(assets/pattern-strip.png) repeat-x left top / auto 14px;"></div>
+              <div style="padding:46px 50px 90px;max-width:952px;">
+                <dc-import name="OField" label="Description" kind="textarea" height="102" value="{{ req.desc }}" on-change="{{ setR.desc }}" tgt="f-rdesc" hint-size="100%,102px"></dc-import>
+                <div style="margin-top:15px;"><dc-import name="OField" label="Justification" kind="textarea" height="102" value="{{ req.justification }}" on-change="{{ setR.justification }}" hint-size="100%,102px"></dc-import></div>
+                <div style="font-size:22px;font-weight:700;margin:52px 0 20px;">Supplier</div>
+                <div style="max-width:463px;display:flex;flex-direction:column;gap:15px;">
+                  <dc-import name="OField" label="Supplier" kind="readonly" value="{{ firstSupplier }}" hint-size="100%,54px"></dc-import>
+                  <dc-import name="OField" label="Additional Contact Email" kind="textarea" height="90" value="{{ req.email }}" on-change="{{ setR.email }}" hint-size="100%,90px"></dc-import>
+                </div>
+                <div data-tgt="delivery">
+                  <div style="font-size:22px;font-weight:700;margin:52px 0 20px;">Delivery</div>
+                  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 24px;align-items:start;">
+                    <dc-import name="OField" label="Requested Delivery Date" icon="cal" value="{{ req.date }}" on-change="{{ setR.date }}" hint-size="100%,52px"></dc-import>
+                    <dc-import name="OField" label="Deliver-to Location Type" kind="select" value="{{ req.locType }}" options="{{ opt.locType }}" on-change="{{ setR.locType }}" hint-size="100%,52px"></dc-import>
+                    <dc-import name="OField" label="Deliver to Location" kind="select" value="{{ req.loc }}" options="{{ opt.loc }}" on-change="{{ setR.loc }}" hint-size="100%,52px"></dc-import>
+                  </div>
+                  <div onClick="{{ tgUrgent }}" data-tgt="f-urgent" style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:17px;width:max-content;margin-top:24px;">
+                    <div style="{{ cb.urgent }}"><sc-if value="{{ req.urgent }}"><svg sc-camel-view-box="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:#fff;stroke-width:3;"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if></div>Urgent</div>
+                </div>
+                <div data-tgt="charge">
+                  <div style="font-size:22px;font-weight:700;margin:52px 0 20px;">Charge account</div>
+                  <div style="max-width:436px;"><dc-import name="OField" label="Charge To" icon="ext" value="{{ req.chargeTo }}" on-change="{{ setR.chargeTo }}" hint-size="100%,52px"></dc-import></div>
+                  <div style="font-size:22px;font-weight:700;margin:40px 0 20px;">Additional information</div>
+                  <div style="max-width:436px;"><dc-import name="OField" label="Project Number" kind="select" value="{{ req.project }}" options="{{ opt.project }}" on-change="{{ setR.project }}" hint-size="100%,52px"></dc-import></div>
+                </div>
+                <div style="font-size:22px;font-weight:700;margin:52px 0 20px;">Notes</div>
+                <dc-import name="OField" label="Note to Supplier" kind="textarea" height="102" value="{{ req.note }}" on-change="{{ setR.note }}" hint-size="100%,102px"></dc-import>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isLine }}">
+        <div style="position:relative;min-height:100%;background:#efedeb;">
+          <div style="position:absolute;left:0;right:0;top:0;height:250px;background:#315357;"></div>
+          <div style="position:relative;max-width:1480px;margin:0 auto;padding:0 3vw 70px;">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:16px 48px 22px;">
+              <div style="color:#fff;"><div style="font-size:30px;font-weight:700;line-height:1.2;">Requisition Line Details</div><div style="font-size:15px;font-weight:600;margin-top:4px;">Requisition {{ reqNum }}</div></div>
+              <div style="display:flex;gap:16px;">
+                <div onClick="{{ goCart }}" style="height:36px;padding:0 16px;border:1px solid rgba(255,255,255,.75);border-radius:4px;display:flex;align-items:center;color:#fff;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap;flex:none;" style-hover="background:rgba(255,255,255,.1);">Cancel</div>
+                <div onClick="{{ actLineUpdate }}" data-tgt="btn-lupdate" style="height:36px;padding:0 17px;border:1px solid #fff;background:#fff;border-radius:4px;display:flex;align-items:center;color:#161513;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap;flex:none;" style-hover="background:#ebe8e5;">Update</div>
+              </div>
+            </div>
+            <div style="background:#fcf9f8;box-shadow:0 1px 4px rgba(0,0,0,.12);border-radius:6px 6px 0 0;overflow:hidden;">
+              <div style="height:12px;background:url(assets/pattern-strip.png) repeat-x left top / auto 12px;"></div>
+              <div style="padding:50px 48px 90px;max-width:944px;">
+                <div style="display:flex;gap:36px;font-size:16px;font-weight:600;">
+                  <div onClick="{{ lineTabLine }}" style="{{ ltabLineStyle }}">Line Details</div>
+                  <div onClick="{{ actTabDbd }}" data-tgt="tab-dbd" style="{{ ltabDbdStyle }}">Delivery and Billing Details</div>
+                </div>
+                <sc-if value="{{ ltabLine }}" hint-placeholder-val="{{ true }}">
+                  <div style="margin-top:40px;">
+                    <dc-import name="OField" label="Item Description" kind="textarea" height="122" value="{{ ld.desc }}" on-change="{{ setL.desc }}" hint-size="100%,122px"></dc-import>
+                    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 24px;align-items:start;margin-top:15px;">
+                      <dc-import name="OField" label="Item Type" kind="readonly" value="{{ ld.itemType }}" hint-size="100%,52px"></dc-import>
+                      <dc-import name="OField" label="Category" kind="select" value="{{ ld.category }}" options="{{ opt.category }}" on-change="{{ setL.category }}" hint-size="100%,52px"></dc-import>
+                    </div>
+                    <div style="font-size:22px;font-weight:700;margin:50px 0 24px;">Pricing</div>
+                    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 24px;align-items:start;">
+                      <dc-import name="OField" label="Quantity" value="{{ ld.qty }}" on-change="{{ setL.qty }}" hint-size="100%,52px"></dc-import>
+                      <dc-import name="OField" label="UOM" kind="select" value="{{ ld.uom }}" options="{{ opt.uom }}" on-change="{{ setL.uom }}" hint-size="100%,52px"></dc-import>
+                      <dc-import name="OField" label="Price" prefix="$" value="{{ ld.price }}" on-change="{{ setL.price }}" hint-size="100%,52px"></dc-import>
+                      <dc-import name="OField" label="Currency" kind="select" value="{{ ld.currency }}" options="{{ opt.currency }}" on-change="{{ setL.currency }}" hint-size="100%,52px"></dc-import>
+                    </div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ ltabDbd }}">
+                  <div style="margin-top:40px;">
+                    <div style="font-size:22px;font-weight:700;margin:0 0 24px;">Delivery</div>
+                    <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 24px;align-items:start;">
+                      <dc-import name="OField" label="Requested Delivery Date" icon="cal" value="{{ ld.date }}" on-change="{{ setL.date }}" hint-size="100%,52px"></dc-import>
+                      <dc-import name="OField" label="Deliver-to Location Type" kind="readonly" value="Internal" hint-size="100%,52px"></dc-import>
+                      <dc-import name="OField" label="Deliver-to Location" kind="select" value="{{ ld.loc }}" options="{{ opt.loc }}" on-change="{{ setL.loc }}" hint-size="100%,52px"></dc-import>
+                    </div>
+                    <div style="margin-top:15px;"><dc-import name="OField" label="Deliver-to Address" kind="readonly" value="1200 Meadowlark Pkwy, Suite 400, AUSTIN, TX 78701, UNITED STATES" hint-size="100%,52px"></dc-import></div>
+                    <div onClick="{{ tgLineUrgent }}" style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:17px;width:max-content;margin-top:24px;">
+                      <div style="{{ cb.lineUrgent }}"><sc-if value="{{ ld.urgent }}"><svg sc-camel-view-box="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:#fff;stroke-width:3;"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if></div>Urgent</div>
+                    <div style="font-size:22px;font-weight:700;margin:50px 0 24px;">Billing</div>
+                    <div style="max-width:436px;"><dc-import name="OField" label="Charge To" icon="ext" value="{{ ld.chargeTo }}" on-change="{{ setL.chargeTo }}" hint-size="100%,52px"></dc-import></div>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isApprovers }}">
+        <div style="position:relative;min-height:100%;background:#efedeb;">
+          <div style="position:absolute;left:0;right:0;top:0;height:270px;background:#315357;"></div>
+          <div style="position:relative;max-width:1480px;margin:0 auto;padding:0 3vw 70px;">
+            <div style="color:#fff;padding:18px 50px 40px;">
+              <div style="display:flex;align-items:center;gap:22px;">
+                <div onClick="{{ goCart }}" style="cursor:pointer;display:flex;width:36px;height:36px;align-items:center;justify-content:center;border-radius:4px;" style-hover="background:rgba(255,255,255,.12);"><svg sc-camel-view-box="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#fff;stroke-width:1.8;"><path d="M15 5l-7 7 7 7"></path></svg></div>
+                <div style="font-size:34px;font-weight:700;">Approvers</div>
+              </div>
+              <div style="font-size:16px;font-weight:600;margin:2px 0 0 58px;">Requisition {{ reqNum }}</div>
+              <div style="display:flex;gap:28px;flex-wrap:wrap;font-size:16px;margin:26px 0 0 0;">
+                <div>Entered By <span style="font-weight:700;margin-left:6px;">{{ userName }}</span></div>
+                <div>Business Unit <span style="font-weight:700;margin-left:6px;">ACME US BU</span></div>
+                <div>Description <span style="font-weight:700;margin-left:6px;">{{ req.desc }}</span></div>
+              </div>
+            </div>
+            <div style="background:#fbf9f8;box-shadow:0 1px 4px rgba(0,0,0,.12);border-radius:6px 6px 0 0;overflow:hidden;">
+              <div style="height:14px;background:url(assets/pattern-strip.png) repeat-x left top / auto 14px;"></div>
+              <div style="padding:60px 0 60px;">
+                <div style="margin-left:50px;width:max-content;height:38px;padding:0 16px;border:1px solid #c9c5c0;border-radius:4px;display:flex;align-items:center;gap:10px;color:#8d8883;font-size:16px;font-weight:600;">
+                  <svg sc-camel-view-box="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:#8d8883;stroke-width:1.5;"><path d="M12 4v16M4 12h16"></path></svg>Add Approvers</div>
+                <div data-tgt="approvers-list" style="margin-top:30px;">
+                  <sc-for list="{{ approvers }}" as="ap" hint-placeholder-count="5">
+                    <div style="display:flex;gap:22px;padding:16px 50px;border-bottom:1px solid #dedad6;align-items:flex-start;">
+                      <div style="width:24px;flex:none;padding-top:4px;">
+                        <sc-if value="{{ ap.group }}"><svg sc-camel-view-box="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#3b3733;stroke-width:1.5;"><circle cx="9" cy="8" r="3.2"></circle><path d="M3 19c0-3.5 2.7-5.5 6-5.5s6 2 6 5.5M15 4.8a3.2 3.2 0 010 6.4M17 13.7c2.4.5 4 2.3 4 5.3"></path></svg></sc-if>
+                        <sc-if value="{{ ap.person }}"><svg sc-camel-view-box="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#3b3733;stroke-width:1.5;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20c0-4 3.1-6 7-6s7 2 7 6"></path></svg></sc-if>
+                        <sc-if value="{{ ap.submit }}"><svg sc-camel-view-box="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#161513;stroke-width:1.7;"><circle cx="12" cy="12" r="9"></circle><path d="M12 17V8M8 11.5L12 7.5l4 4"></path></svg></sc-if>
+                      </div>
+                      <div>
+                        <div style="font-size:13px;color:#5b5652;">{{ ap.over }}</div>
+                        <div style="font-size:19px;">{{ ap.name }}</div>
+                        <div style="font-size:16px;margin-top:2px;">{{ ap.rule }}<span style="color:#5b5652;">{{ ap.ruleVal }}</span></div>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isMyReqs }}">
+        <div style="position:relative;min-height:100%;background:#efedeb;">
+          <div style="position:absolute;left:0;right:0;top:0;height:250px;background:#315357;"></div>
+          <div style="position:relative;max-width:1540px;margin:0 auto;padding:0 2vw 110px;">
+            <div style="padding:22px 50px 26px;color:#fff;">
+              <div style="font-size:32px;font-weight:700;">My Requisitions</div>
+              <div style="margin-top:14px;height:46px;border:1px solid rgba(255,255,255,.6);border-radius:4px;display:flex;align-items:center;gap:12px;padding:0 6px 0 14px;box-sizing:border-box;">
+                <svg sc-camel-view-box="0 0 24 24" style="width:20px;height:20px;flex:none;fill:none;stroke:#fff;stroke-width:1.8;"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5L21 21"></path></svg>
+                <div style="height:34px;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.13);border-radius:4px;padding:0 10px;font-size:15px;white-space:nowrap;">Entered By <span style="font-weight:700;">{{ userName }}</span><span style="width:1px;height:18px;background:rgba(255,255,255,.35);"></span><svg sc-camel-view-box="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:#fff;stroke-width:1.8;"><path d="M6 6l12 12M18 6L6 18"></path></svg></div>
+                <input placeholder="Search for requisitions" style="flex:1;min-width:0;background:transparent;border:none;outline:none;color:#fff;font-size:16px;font-family:inherit;">
+              </div>
+              <div data-tgt="status-chips" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;">
+                <sc-for list="{{ chips }}" as="ch" hint-placeholder-count="3">
+                  <div onClick="{{ notAvail }}" style="height:34px;padding:0 10px;border:1px solid rgba(255,255,255,.55);border-radius:4px;display:flex;align-items:center;gap:6px;font-size:15px;cursor:pointer;white-space:nowrap;" style-hover="background:rgba(255,255,255,.1);">{{ ch.a }} <span style="font-weight:700;">{{ ch.b }}</span><span style="margin-left:4px;">{{ ch.n }}</span></div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="background:#fbf9f8;box-shadow:0 1px 4px rgba(0,0,0,.12);border-radius:6px 6px 0 0;overflow:hidden;">
+              <div style="height:14px;background:url(assets/pattern-strip.png) repeat-x left top / auto 14px;"></div>
+              <div style="padding:58px 50px 70px;">
+                <div style="font-size:17px;font-weight:600;padding-bottom:22px;border-bottom:1px solid #c9c5c0;">{{ reqCountText }}</div>
+                <sc-for list="{{ myReqs }}" as="rq" hint-placeholder-count="1">
+                  <div onClick="{{ notAvail }}" style="display:grid;grid-template-columns:minmax(140px,220px) minmax(0,1fr) minmax(0,1fr) 180px;gap:20px;align-items:center;padding:24px 40px;background:#f3f1ef;border-bottom:1px solid #e3dfdb;cursor:pointer;font-size:15px;" style-hover="background:#ebe8e5;">
+                    <div><div style="font-size:16px;font-weight:700;">{{ rq.num }}</div><div style="font-size:14px;margin-top:4px;color:#4f4b47;">{{ rq.desc }}</div></div>
+                    <div>Entered By {{ userName }}</div>
+                    <div style="text-align:right;">{{ rq.amount }}</div>
+                    <div style="justify-self:end;"><span style="{{ rq.badge }}">{{ rq.status }}</span></div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isResults }}">
+        <div style="position:relative;min-height:100%;background:#efedeb;">
+          <div style="position:absolute;left:0;right:0;top:0;height:230px;background:#315357;"></div>
+          <div style="position:relative;max-width:1480px;margin:0 auto;padding:0 3vw 70px;">
+            <div style="color:#fff;padding:18px 50px 34px;">
+              <div style="display:flex;align-items:center;gap:22px;">
+                <div onClick="{{ goSspBack }}" style="cursor:pointer;display:flex;width:36px;height:36px;align-items:center;justify-content:center;border-radius:4px;" style-hover="background:rgba(255,255,255,.12);"><svg sc-camel-view-box="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#fff;stroke-width:1.8;"><path d="M15 5l-7 7 7 7"></path></svg></div>
+                <div style="font-size:30px;font-weight:700;line-height:1.2;">Search Results</div>
+              </div>
+              <div style="font-size:16px;font-weight:600;margin:2px 0 0 58px;">4 results for “{{ resQuery }}”</div>
+            </div>
+            <div style="background:#fbf9f8;box-shadow:0 1px 4px rgba(0,0,0,.12);border-radius:6px 6px 0 0;overflow:hidden;">
+              <div style="height:14px;background:url(assets/pattern-strip.png) repeat-x left top / auto 14px;"></div>
+              <div style="padding:36px 50px 70px;">
+                <div style="display:flex;justify-content:flex-end;gap:12px;margin-bottom:24px;">
+                  <div onClick="{{ openListDlg }}" data-tgt="res-addlist" style="height:38px;padding:0 16px;white-space:nowrap;border:1px solid #8d8883;border-radius:4px;display:flex;align-items:center;font-size:16px;font-weight:600;cursor:pointer;color:#161513;" style-hover="background:#f1efed;">Add to Shopping List</div>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px;">
+                  <sc-for list="{{ products }}" as="pd" hint-placeholder-count="4">
+                    <div style="background:#fff;border:1px solid #dedad6;border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:10px;">
+                      <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                        <div onClick="{{ pd.check }}" data-tgt="{{ pd.checkTgt }}" style="{{ pd.cb }}"><svg sc-camel-view-box="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:#fff;stroke-width:3;"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>
+                      </div>
+                      <div style="height:120px;background:#f3f1ef;border-radius:4px;display:flex;align-items:center;justify-content:center;"><svg sc-camel-view-box="0 0 24 24" style="width:44px;height:44px;fill:none;stroke:#b5afa9;stroke-width:1.3;"><path d="M3.5 7.5L12 3l8.5 4.5v9L12 21l-8.5-4.5zM3.5 7.5L12 12l8.5-4.5M12 12v9"></path></svg></div>
+                      <div style="font-size:16px;font-weight:600;line-height:1.3;color:#161513;">{{ pd.name }}</div>
+                      <div style="font-size:14px;color:#4f4b47;">{{ pd.supplier }}</div>
+                      <div style="font-size:18px;font-weight:700;color:#161513;">{{ pd.price }}</div>
+                      <div onClick="{{ pd.add }}" data-tgt="{{ pd.addTgt }}" style="height:38px;white-space:nowrap;border:1px solid #8d8883;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;cursor:pointer;color:#161513;margin-top:4px;" style-hover="background:#f1efed;">Add to Cart</div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </div>
+          <sc-if value="{{ listDlg }}">
+            <div style="position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:30;display:flex;justify-content:flex-end;">
+              <div style="width:min(480px,92%);height:100%;background:#fff;box-shadow:-6px 0 24px rgba(0,0,0,.25);padding:28px 32px;box-sizing:border-box;color:#161513;display:flex;flex-direction:column;gap:20px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;"><div style="font-size:24px;font-weight:700;">Add to List</div><div onClick="{{ closeListDlg }}" style="cursor:pointer;font-size:22px;">×</div></div>
+                <div style="font-size:15px;color:#4f4b47;">Shopping List Name</div>
+                <div style="height:44px;border:1px solid #c9c5c0;border-radius:4px;display:flex;align-items:center;padding:0 14px;color:#8d8883;font-size:16px;">Select a list</div>
+                <div onClick="{{ listNewOn }}" data-tgt="list-new" style="width:max-content;height:38px;padding:0 16px;border:1px solid #8d8883;border-radius:4px;display:flex;align-items:center;font-size:16px;font-weight:600;cursor:pointer;" style-hover="background:#f1efed;">Add to New List</div>
+                <sc-if value="{{ listNew }}">
+                  <div data-tgt="list-name" style="display:flex;flex-direction:column;gap:6px;">
+                    <div style="font-size:14px;color:#4f4b47;">New List Name</div>
+                    <div style="height:44px;border:1px solid #161513;border-radius:4px;display:flex;align-items:center;padding:0 14px;font-size:16px;">Exam Room Supplies</div>
+                  </div>
+                  <div onClick="{{ listAdd }}" data-tgt="list-add" style="width:max-content;height:38px;padding:0 22px;background:#312d2a;color:#fff;border-radius:4px;display:flex;align-items:center;font-size:16px;font-weight:600;cursor:pointer;">Add</div>
+                </sc-if>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isLists }}">
+        <div style="position:relative;min-height:100%;background:#efedeb;">
+          <div style="position:absolute;left:0;right:0;top:0;height:230px;background:#315357;"></div>
+          <div style="position:relative;max-width:1480px;margin:0 auto;padding:0 3vw 70px;">
+            <div style="color:#fff;padding:18px 50px 34px;">
+              <div style="display:flex;align-items:center;gap:22px;">
+                <div onClick="{{ goSspBack }}" style="cursor:pointer;display:flex;width:36px;height:36px;align-items:center;justify-content:center;border-radius:4px;" style-hover="background:rgba(255,255,255,.12);"><svg sc-camel-view-box="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#fff;stroke-width:1.8;"><path d="M15 5l-7 7 7 7"></path></svg></div>
+                <div style="font-size:30px;font-weight:700;line-height:1.2;">Shopping Lists</div>
+              </div>
+              <div style="font-size:16px;font-weight:600;margin:2px 0 0 58px;">ACME US BU | {{ loc }}</div>
+            </div>
+            <div style="background:#fbf9f8;box-shadow:0 1px 4px rgba(0,0,0,.12);border-radius:6px 6px 0 0;overflow:hidden;">
+              <div style="height:14px;background:url(assets/pattern-strip.png) repeat-x left top / auto 14px;"></div>
+              <div style="padding:40px 50px 70px;">
+                <div onClick="{{ listOpen }}" data-tgt="list-row" style="display:flex;justify-content:space-between;align-items:center;padding:22px 24px;background:#f3f1ef;border-bottom:1px solid #e3dfdb;cursor:pointer;font-size:16px;color:#161513;" style-hover="background:#ebe8e5;">
+                  <div><div style="font-weight:700;">Exam Room Supplies</div><div style="font-size:14px;color:#4f4b47;margin-top:4px;">1 item · Private</div></div>
+                  <svg sc-camel-view-box="0 0 24 24" style="width:20px;height:20px;fill:none;stroke:#161513;stroke-width:1.8;"><path d="M9 5l7 7-7 7"></path></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ showNav }}">
+      <div style="height:58px;flex:none;background:#233b3f;display:flex;align-items:stretch;padding-left:24px;color:#fff;">
+        <div onClick="{{ actNavSsp }}" data-tgt="nav-ssp" style="position:relative;display:flex;align-items:center;gap:12px;padding:0 10px;margin-right:12px;cursor:pointer;font-size:17px;font-weight:600;">
+          <sc-if value="{{ navSspOn }}"><div style="position:absolute;left:0;right:0;top:0;height:3px;background:#f2cd72;"></div></sc-if>
+          <svg sc-camel-view-box="0 0 24 24" style="{{ navIcon.ssp }}"><path d="M3.5 9V20.5h17V9M3 9l1.5-5h15L21 9zM3 9c0 1.7 1.3 2.5 2.6 2.5S8.2 10.7 8.2 9c0 1.7 1.3 2.5 2.6 2.5S13.4 10.7 13.4 9c0 1.7 1.3 2.5 2.6 2.5S18.6 10.7 18.6 9M9 20.5V15h6v5.5"></path></svg>
+          <span style="{{ navTxt.ssp }}">Self Service Procurement</span>
+        </div>
+        <div onClick="{{ actNavMy }}" data-tgt="nav-myreq" style="position:relative;display:flex;align-items:center;gap:12px;padding:0 10px;margin-right:12px;cursor:pointer;font-size:17px;font-weight:600;">
+          <sc-if value="{{ navMyOn }}"><div style="position:absolute;left:0;right:0;top:0;height:3px;background:#f2cd72;"></div></sc-if>
+          <svg sc-camel-view-box="0 0 24 24" style="{{ navIcon.my }}"><path d="M6 4.5h12V21H6zM9 3h6v3H9zM9 10h6M9 13.5h6M9 17h4M3.5 7v14"></path></svg>
+          <span style="{{ navTxt.my }}">My Requisitions</span>
+        </div>
+        <div onClick="{{ actNavCart }}" data-tgt="nav-cart" style="position:relative;display:flex;align-items:center;gap:12px;padding:0 10px;cursor:pointer;font-size:17px;font-weight:600;">
+          <sc-if value="{{ navCartOn }}"><div style="position:absolute;left:0;right:0;top:0;height:3px;background:#f2cd72;"></div></sc-if>
+          <svg sc-camel-view-box="0 0 24 24" style="{{ navIcon.cart }}"><path d="M2.5 4h3l2.4 11h10.6l2.2-8H6.6"></path><circle cx="9" cy="19" r="1.5"></circle><circle cx="17" cy="19" r="1.5"></circle></svg>
+          <span style="{{ navTxt.cart }}">Cart</span>
+          <sc-if value="{{ hasCount }}"><span style="background:#8f8c89;color:#1e1c1a;border-radius:12px;padding:1px 9px;font-size:14px;font-weight:600;">{{ cartCount }}</span></sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ confirmAdd }}">
+      <div style="position:absolute;top:290px;left:50%;transform:translateX(-50%);width:490px;max-width:90%;background:#f0f5e6;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,.18);padding:20px 22px 20px;z-index:30;display:flex;gap:12px;">
+        <svg sc-camel-view-box="0 0 24 24" style="width:20px;height:20px;flex:none;margin-top:2px;"><circle cx="12" cy="12" r="10" style="fill:#4a7c2a;"></circle><path d="M7 12.5l3.2 3.2L17 9" style="fill:none;stroke:#fff;stroke-width:2.4;"></path></svg>
+        <div style="flex:1;">
+          <div style="font-size:19px;">Confirmation</div>
+          <div style="font-size:21px;font-weight:700;margin-top:10px;">Request added to cart</div>
+          <div style="display:flex;flex-direction:column;gap:6px;margin-top:12px;font-size:17px;">
+            <a onClick="{{ anotherSame }}" style="cursor:pointer;">Create another request with the same supplier</a>
+            <a onClick="{{ another }}" style="cursor:pointer;">Create another request</a>
+          </div>
+        </div>
+        <div onClick="{{ closeConfirmAdd }}" style="cursor:pointer;display:flex;height:max-content;"><svg sc-camel-view-box="0 0 24 24" style="width:24px;height:24px;fill:none;stroke:#161513;stroke-width:2;"><path d="M6 6l12 12M18 6L6 18"></path></svg></div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ confirmSubmit }}">
+      <div style="position:absolute;top:230px;left:50%;transform:translateX(-50%);width:512px;max-width:90%;background:#f4f6e8;border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,.18);padding:18px 22px 20px;z-index:30;display:flex;gap:12px;">
+        <svg sc-camel-view-box="0 0 24 24" style="width:18px;height:18px;flex:none;margin-top:2px;"><circle cx="12" cy="12" r="10" style="fill:#4a7c2a;"></circle><path d="M7 12.5l3.2 3.2L17 9" style="fill:none;stroke:#fff;stroke-width:2.4;"></path></svg>
+        <div style="flex:1;">
+          <div style="font-size:16px;">Confirmation</div>
+          <div style="font-size:18px;font-weight:700;margin-top:10px;">Requisition submitted</div>
+          <div style="font-size:14px;margin-top:6px;">Requisition {{ lastReqNum }} was submitted for approval.<a onClick="{{ actViewReq }}" data-tgt="link-viewreq" style="cursor:pointer;font-weight:600;">View requisition</a></div>
+        </div>
+        <div onClick="{{ closeConfirmSubmit }}" style="cursor:pointer;display:flex;height:max-content;"><svg sc-camel-view-box="0 0 24 24" style="width:22px;height:22px;fill:none;stroke:#161513;stroke-width:2;"><path d="M6 6l12 12M18 6L6 18"></path></svg></div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ prefsOpen }}">
+      <div style="position:absolute;left:0;right:0;top:52px;bottom:0;z-index:40;display:flex;">
+        <div onClick="{{ closePrefs }}" style="flex:1;background:rgba(0,0,0,.38);"></div>
+        <div style="width:425px;max-width:90%;background:#fbf9f8;display:flex;flex-direction:column;box-shadow:-4px 0 16px rgba(0,0,0,.2);">
+          <div style="flex:1;overflow:auto;padding:26px 22px;">
+            <div style="font-size:26px;font-weight:700;margin-bottom:24px;">Preferences</div>
+            <dc-import name="OField" label="Requisitioning BU" kind="readonly" value="ACME US BU" hint-size="100%,52px"></dc-import>
+            <div style="font-size:15px;font-weight:700;margin:26px 0 12px;">Delivery</div>
+            <dc-import name="OField" label="Deliver to Location" kind="select" value="{{ prefLoc }}" options="{{ opt.loc }}" on-change="{{ setPrefLoc }}" hint-size="100%,52px"></dc-import>
+            <div style="font-size:15px;margin-top:12px;">Or <a onClick="{{ notAvail }}" style="cursor:pointer;margin-left:4px;">Enter an address</a></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;">
+              <div style="font-size:14px;font-weight:700;">Charge accounts</div>
+              <div onClick="{{ notAvail }}" style="cursor:pointer;display:flex;"><svg sc-camel-view-box="0 0 24 24" style="width:22px;height:22px;fill:none;stroke:#161513;stroke-width:1.5;"><path d="M12 4v16M4 12h16"></path></svg></div>
+            </div>
+            <div style="font-size:20px;font-weight:700;margin-top:90px;">Display settings</div>
+            <div style="font-size:12px;color:#4f4b47;margin-top:4px;">Display preferences apply to all BUs you have access to.</div>
+            <div style="display:flex;flex-direction:column;gap:14px;margin-top:18px;font-size:15px;">
+              <div style="display:flex;align-items:center;gap:10px;"><div style="width:16px;height:16px;border-radius:2px;background:#161513;display:flex;align-items:center;justify-content:center;"><svg sc-camel-view-box="0 0 24 24" style="width:12px;height:12px;fill:none;stroke:#fff;stroke-width:3;"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>Show the table view for the cart</div>
+              <div style="display:flex;align-items:center;gap:10px;"><div style="width:16px;height:16px;border-radius:2px;background:#161513;display:flex;align-items:center;justify-content:center;"><svg sc-camel-view-box="0 0 24 24" style="width:12px;height:12px;fill:none;stroke:#fff;stroke-width:3;"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>Show the table view for search results</div>
+              <div style="display:flex;align-items:center;gap:10px;"><div style="width:16px;height:16px;border-radius:2px;background:#161513;display:flex;align-items:center;justify-content:center;"><svg sc-camel-view-box="0 0 24 24" style="width:12px;height:12px;fill:none;stroke:#fff;stroke-width:3;"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>Show the requisitions view for my requisitions</div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:flex-end;gap:14px;padding:16px 22px;border-top:1px solid #e3dfdb;">
+            <div onClick="{{ closePrefs }}" style="height:36px;padding:0 16px;border:1px solid #8d8883;border-radius:4px;display:flex;align-items:center;font-size:15px;font-weight:600;cursor:pointer;background:#fff;" style-hover="background:#f1efed;">Cancel</div>
+            <div onClick="{{ updatePrefs }}" style="height:36px;padding:0 16px;border-radius:4px;display:flex;align-items:center;font-size:15px;font-weight:600;cursor:pointer;background:#312d2a;color:#fff;" style-hover="background:#1e1b19;">Update</div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ toast }}">
+      <div style="position:absolute;left:50%;bottom:84px;transform:translateX(-50%);background:#1d2b2e;color:#fff;font-family:'Segoe UI Variable','Segoe UI',-apple-system,'Helvetica Neue',Arial,sans-serif;font-size:15px;padding:12px 18px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.25);z-index:60;max-width:80%;display:flex;gap:10px;align-items:center;">
+        <div style="width:8px;height:8px;border-radius:50%;background:#5F646A;flex:none;"></div>{{ toastMsg }}</div>
+    </sc-if>
+
+    <sc-if value="{{ showLauncher }}">
+      <div onClick="{{ openWelcome }}" style="position:absolute;right:20px;bottom:76px;z-index:46;background:#326DC2;color:#fff;font-family:'Segoe UI Variable','Segoe UI',-apple-system,'Helvetica Neue',Arial,sans-serif;font-size:14px;font-weight:600;padding:11px 18px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.25);cursor:pointer;display:flex;align-items:center;gap:8px;" style-hover="background:#1356B8;">
+        <svg sc-camel-view-box="0 0 24 24" style="width:18px;height:18px;fill:none;stroke:#fff;stroke-width:1.8;"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9.5a2.5 2.5 0 114 2c-1 .7-1.5 1.2-1.5 2.5M12 17h.01"></path></svg>What's New</div>
+    </sc-if>
+  </div>
+
+  {{ ringEl }}
+  <div style="{{ tpWrap }}">
+    <div style="width:380px;height:100%;display:flex;flex-direction:column;background:#fff;border-left:1px solid #d4e1e3;font-family:'Segoe UI Variable','Segoe UI',-apple-system,'Helvetica Neue',Arial,sans-serif;color:#2C2E31;">
+      <div style="background:#326DC2;flex:none;">
+        <div style="display:flex;align-items:center;gap:14px;height:60px;padding:0 14px 0 20px;"><svg role="img" aria-label="ACME" viewBox="0 0 132 36" style="height:30px;width:auto;display:block" xmlns="http://www.w3.org/2000/svg"><path d="M18 3 L33 32 H3 Z" fill="none" stroke="#fff" stroke-width="3.5" stroke-linejoin="round"/><path d="M11 24 H25" stroke="#fff" stroke-width="3"/><text x="44" y="27" fill="#fff" font-family="Inter,system-ui,sans-serif" font-size="23" font-weight="800" letter-spacing="2">ACME</text></svg>
+        <div style="width:1px;height:28px;background:rgba(255,255,255,.28);"></div><div style="flex:1;"></div><div onClick="{{ tpCollapse }}" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;" style-hover="background:rgba(255,255,255,.12);"><svg sc-camel-view-box="0 0 24 24" style="width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;"><path d="M9 6l6 6-6 6"></path></svg></div></div>
+        <div style="display:flex;border-top:1px solid rgba(255,255,255,.1);">
+          <div onClick="{{ pickNew }}" style="{{ tabNewSt }}">What's New</div>
+          <div onClick="{{ pickPractice }}" style="{{ tabPracSt }}">Practice</div>
+        </div>
+      </div>
+      <div ref="{{ tpListRef }}" style="flex:1;overflow:auto;">
+        <sc-if value="{{ isNewView }}" hint-placeholder-val="{{ true }}"><sc-for list="{{ tourList }}" as="t" hint-placeholder-count="14">
+          <div onClick="{{ t.go }}" data-tprow="{{ t.n }}" style="{{ t.row }}" style-hover="background:#F8F9FA;">
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <span style="{{ t.num }}">{{ t.n }}</span>
+              <span style="{{ t.titleSt }}">{{ t.title }}</span>
+            </div>
+            <sc-if value="{{ t.on }}">
+              <div style="padding:0 0 4px 38px;margin-top:2px;font-size:14.5px;line-height:1.55;color:#2C2E31;"><sc-for list="{{ t.now }}" as="s"><span style="{{ s.st }}">{{ s.t }}</span></sc-for></div>
+            </sc-if>
+          </div>
+        </sc-for></sc-if>
+        <sc-if value="{{ isPmenu }}">
+          <div style="padding:22px 20px 8px;">
+            <div style="font-size:15px;line-height:1.5;color:#3a565b;">Try common tasks in a practice copy of Oracle. Nothing you enter is saved.</div>
+          </div>
+          <div style="display:flex;flex-direction:column;">
+            <sc-for list="{{ prList }}" as="p" hint-placeholder-count="4">
+              <div onClick="{{ p.go }}" style="display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid #b9c7ca;cursor:pointer;" style-hover="background:#F8F9FA;">
+                <div style="flex:1;min-width:0;"><div style="font-size:15px;font-weight:600;">{{ p.title }}</div><div style="font-size:13px;color:#5A6F8E;margin-top:2px;">{{ p.sub }}</div></div>
+                <sc-if value="{{ p.done }}"><svg sc-camel-view-box="0 0 24 24" style="width:18px;height:18px;flex:none;fill:none;stroke:#498b48;stroke-width:2.6;"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if>
+                <span style="color:#326DC2;font-weight:700;">→</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ inPractice }}">
+          <div onClick="{{ backToMenu }}" style="display:flex;align-items:center;gap:6px;padding:14px 20px 0;font-size:13px;font-weight:600;color:#326DC2;cursor:pointer;">← All Practice</div>
+          <div style="padding:6px 20px 8px;font-size:18px;font-weight:700;">{{ practiceName }}</div>
+        </sc-if>
+        <sc-if value="{{ isPracView }}">
+          <sc-for list="{{ practiceList }}" as="p" hint-placeholder-count="10">
+          <div>
+            <sc-if value="{{ p.secHead }}"><div style="padding:16px 20px 6px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1A6AD9;background:#fff;">{{ p.sec }}</div></sc-if>
+            <div onClick="{{ p.go }}" data-tprow="{{ p.key }}" style="{{ p.row }}" style-hover="background:#F8F9FA;">
+              <div style="display:flex;align-items:flex-start;gap:12px;">
+                <span style="{{ p.num }}">{{ p.n }}</span>
+                <span style="{{ p.txt }}"><sc-for list="{{ p.x }}" as="s"><span style="{{ s.st }}">{{ s.t }}</span></sc-for></span>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+        </sc-if>
+        <sc-if value="{{ isFlowView }}"><sc-for list="{{ tourList }}" as="t" hint-placeholder-count="10">
+          <div onClick="{{ t.go }}" data-tprow="{{ t.n }}" style="{{ t.row }}" style-hover="background:#F8F9FA;">
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <span style="{{ t.num }}">{{ t.n }}</span>
+              <span style="{{ t.titleSt }}">{{ t.title }}</span>
+            </div>
+            <sc-if value="{{ t.on }}">
+              <div style="padding:0 0 4px 38px;margin-top:2px;font-size:14.5px;line-height:1.55;color:#2C2E31;"><sc-for list="{{ t.now }}" as="x"><span style="{{ x.st }}">{{ x.t }}</span></sc-for></div>
+            </sc-if>
+          </div>
+        </sc-for></sc-if>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:14px 20px;border-top:1px solid #e3e9ea;flex:none;">
+        <sc-if value="{{ footOn }}"><div onClick="{{ panelBack }}" style="{{ tpBack }}">Back</div></sc-if>
+        <sc-if value="{{ footOn }}"><div style="flex:1;font-size:13px;color:#5A6F8E;text-align:center;">{{ tpCount }}</div></sc-if>
+      </div>
+    </div>
+  </div>
+  <sc-if value="{{ tpTab }}">
+    <div onClick="{{ tpExpand }}" style="position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:58;background:#326DC2;color:#fff;font-family:'Segoe UI Variable','Segoe UI',-apple-system,'Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:600;padding:14px 10px;writing-mode:vertical-rl;cursor:pointer;box-shadow:-4px 0 14px rgba(0,0,0,.2);" style-hover="background:#1b4553;">What's New</div>
+  </sc-if>
+  <sc-if value="{{ isDone }}">
+    <div style="position:fixed;inset:0;z-index:66;background:rgba(4,30,34,.55);display:flex;align-items:center;justify-content:center;padding:24px;font-family:'Segoe UI Variable','Segoe UI',-apple-system,'Helvetica Neue',Arial,sans-serif;animation:acmerise .5s ease-out both;">
+      <div style="width:520px;max-width:100%;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.3);">
+        <div style="display:flex;height:4px;"><div style="flex:1;background:#326DC2;"></div><div style="flex:1;background:#5F646A;"></div><div style="flex:1;background:#5F646A;"></div><div style="flex:1;background:#5F646A;"></div></div>
+        <div style="padding:34px 34px 30px;">
+          <div style="font-size:26px;font-weight:800;color:#326DC2;line-height:1.2;animation:acmerise .5s .1s ease-out both;">{{ doneTitle }}</div>
+          <div style="font-size:15px;line-height:1.55;margin-top:10px;color:#3d4a4c;animation:acmerise .5s .2s ease-out both;">{{ doneText }}</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;animation:acmerise .5s .3s ease-out both;">
+            <div onClick="{{ startGuided }}" style="padding:10px 14px;border:1px solid #9FC6FF;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;color:#326DC2;" style-hover="background:#FDF8F0;">Create a request together</div>
+            <div onClick="{{ startTour }}" style="padding:10px 14px;border:1px solid #9FC6FF;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;color:#326DC2;" style-hover="background:#FDF8F0;">See what's new</div>
+            <div onClick="{{ startExplore }}" style="padding:10px 14px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;color:#fff;background:#326DC2;" style-hover="background:#1356B8;">Explore on my own</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ introOn }}">
+    <div style="{{ introWrap }}">
+      <div style="width:520px;max-width:100%;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.35);font-family:'Segoe UI Variable','Segoe UI',-apple-system,'Helvetica Neue',Arial,sans-serif;color:#2C2E31;">
+        <div style="background:#326DC2;display:flex;align-items:center;gap:14px;height:56px;padding:0 24px;">
+          <svg role="img" aria-label="ACME" viewBox="0 0 132 36" style="height:24px;width:auto;display:block" xmlns="http://www.w3.org/2000/svg"><path d="M18 3 L33 32 H3 Z" fill="none" stroke="#fff" stroke-width="3.5" stroke-linejoin="round"/><path d="M11 24 H25" stroke="#fff" stroke-width="3"/><text x="44" y="27" fill="#fff" font-family="Inter,system-ui,sans-serif" font-size="23" font-weight="800" letter-spacing="2">ACME</text></svg>
+        </div>
+        
+        <div style="padding:32px 32px 30px;">
+          <div style="font-size:24px;font-weight:700;letter-spacing:-.02em;line-height:1.2;color:#326DC2;">Oracle Self-Service Procurement is getting a new look</div>
+          <div style="font-size:16px;line-height:1.55;color:#3a565b;margin-top:12px;">Starting March 9th, Oracle has a fresh new look. Take a quick tour of what's new.</div>
+          <div style="display:flex;align-items:center;gap:18px;margin-top:26px;">
+            <div onClick="{{ startTour }}" style="display:inline-flex;align-items:center;gap:10px;background:#326DC2;color:#fff;font-size:15px;font-weight:500;padding:9px 18px;cursor:pointer;white-space:nowrap;" style-hover="background:#128BCB;">Start the tour →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+  {{ confettiEl }}
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;userName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ACME User&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Practice&quot;},&quot;location&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Austin Support Center&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Practice&quot;},&quot;startMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;welcome&quot;,&quot;tour&quot;,&quot;guided&quot;,&quot;explore&quot;],&quot;default&quot;:&quot;welcome&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Practice&quot;},&quot;showGuidePanel&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Practice&quot;},&quot;tipStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;navy&quot;,&quot;blue&quot;,&quot;outline&quot;],&quot;default&quot;:&quot;blue&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Pop-up&quot;}}">
+class Component extends DCLogic {
+  static G = [
+    { sec: 'Get started', s: 'home', t: 'tab-procurement', a: 'click', x: 'Select **Procurement**.' },
+    { sec: 'Get started', s: 'home', t: 'tile-prnew', a: 'click', x: 'Click **Purchase Requisitions (New)**.' },
+    { sec: 'Get started', s: 'ssp', t: 'ssp-title', a: 'next', x: 'The **Self Service Procurement** page appears. This is your shopping homepage.', tip: 'Buying for a specialty site? Click **Preferences**, select the **Deliver to Location**, and click **Update** before you start. The change stays until you change it back.' },
+    { sec: 'Get started', s: 'ssp', t: 'btn-ncr', a: 'click', x: 'Scroll to the bottom of the page. Then, click **Create Noncatalog Request**.' },
+    { sec: 'Item details', s: 'ncr', t: 'f-desc', a: 'next', x: 'Add an **Item Description**.', ex: ['desc', 'Nitrile exam gloves, medium, box of 100'] },
+    { sec: 'Item details', s: 'ncr', t: 'f-cat', a: 'next', x: 'Use the dropdown menus to assign an **Item Type** and **Category**.', ex: ['category', 'Medical - Supplies'] },
+    { sec: 'Item details', s: 'ncr', t: 'pricing', a: 'next', x: 'Enter the pricing information: **Quantity**, **UOM**, **Price**, and **Currency**.', ex: ['pricing', '6 BOX at $14.25 USD'] },
+    { sec: 'Item details', s: 'ncr', t: 'f-neg', a: 'next', x: 'Check **Negotiated** when the supplier has a catalog enabled in Oracle. Otherwise, leave it blank.' },
+    { sec: 'Supplier', s: 'ncr', t: 'source', a: 'next', x: 'Enter the **Supplier**, **Supplier Site**, **Supplier Contact**, and **Supplier Item**. If it is a new supplier, check **New supplier**.', tip: 'If you don\'t know the Supplier Item number, enter N/A or Unknown. If the supplier contact isn\'t in the list, add the contact information in the Justification before you submit.', ex: ['source', 'NORTHWIND MEDICAL SUPPLY'] },
+    { sec: 'Supplier', s: 'ncr', t: 'mfr', a: 'next', x: 'If needed, add the **Manufacturer** and **Manufacturer Part Number**.' },
+    { sec: 'Notes and attachments', s: 'ncr', t: 'f-note', a: 'next', x: 'Add any notes to the supplier in **Note to Supplier**.', ex: ['note', 'Please include the packing slip.'] },
+    { sec: 'Notes and attachments', s: 'ncr', t: 'f-attcat', a: 'next', x: 'To add an attachment, use the **Category** dropdown to choose who the attachment is for.' },
+    { sec: 'Notes and attachments', s: 'ncr', t: 'dropzone', a: 'click', x: 'Click the **Drag and Drop** field to upload a file. In the practice, a sample quote attaches for you.', tip: 'Attach the quote, item details, or supplier item number so the Procurement team can source the item faster. If the file is a link, paste it in **URL** and click **Add URL**.' },
+    { sec: 'Add to cart', s: 'ncr', t: 'btn-addcart', a: 'click', x: 'Scroll to the top of the page. Click **Add to Cart**.' },
+    { sec: 'Add to cart', s: 'ncr', t: 'nav-cart', a: 'click', x: 'A confirmation appears. Click **Cart** to view your cart.', tip: 'To add another item, click **Create another request**. For another item from the same supplier, click **Create another request with the same supplier**.' },
+    { sec: 'Review the cart', s: 'cart', t: 'lines', a: 'next', x: 'Review the requisition details. Update the **Quantity** here if needed.', tip: 'To delete an item, check its box, then click the trash can icon.' },
+    { sec: 'Review the cart', s: 'cart', t: 'btn-editsum', a: 'click', x: 'To edit requisition details, click the pencil icon at the top right.' },
+    { sec: 'Requisition details', s: 'editReq', t: 'f-rdesc', a: 'next', x: 'Enter a **Description** that best describes your total purchase. Oracle no longer fills this in for you.', ex: ['rdesc', 'Exam room gloves restock'] },
+    { sec: 'Requisition details', s: 'editReq', t: 'delivery', a: 'next', x: 'Check that the **Delivery** information is correct. If the requisition must be processed as soon as possible, check **Urgent**.' },
+    { sec: 'Requisition details', s: 'editReq', t: 'charge', a: 'next', x: 'Add a **Charge To** account. If the purchase is tied to a project, select the **Project Number**.', ex: ['charge', '04-220-3075-6110-000'] },
+    { sec: 'Requisition details', s: 'editReq', t: 'btn-update', a: 'click', x: 'Click **Update** to save the requisition details.' },
+    { sec: 'Line details', s: 'cart', t: 'line-edit', a: 'click', x: 'To edit a line, click the pencil icon on that line.' },
+    { sec: 'Line details', s: 'lineDetails', t: 'tab-dbd', a: 'click', x: 'Click the **Delivery and Billing Details** tab.' },
+    { sec: 'Line details', s: 'lineDetails', t: 'btn-lupdate', a: 'click', x: 'Make any changes. Then, click **Update**.' },
+    { sec: 'Submit', s: 'cart', t: 'btn-more', a: 'click', x: 'To save without submitting, click the three dots at the top right.' },
+    { sec: 'Submit', s: 'cart', t: 'menu-save', a: 'next', x: 'Use **Save for Later** when you need to stop mid-edit. This time, click **Next** to keep going.' },
+    { sec: 'Submit', s: 'cart', t: 'btn-submit', a: 'click', x: 'Click **Submit** to submit the requisition.' },
+    { sec: 'Submit', s: 'ssp', t: 'link-viewreq', a: 'click', x: 'A confirmation appears. Click **View requisition**.' }
+  ];
+  static T = [
+    { s: 'ssp', t: 'nav-cart', title: 'Shopping Cart Position', now: 'The cart is now at the bottom left of every page, labeled **Cart**.', old: 'The cart was a small icon in the top-right corner.', do: 'Click **Cart**.' },
+    { s: 'cart', t: 'btn-more', title: 'Auto-Saving', now: 'Changes save as you work. To stop mid-edit, use **Save for Later** in this menu.', old: 'You had to click **Save** before **Submit**.', do: 'Click the three dots.' },
+    { s: 'cart', t: 'menu-approvers', setup: 'menu', title: 'Approval Process Visibility', now: 'You can see every approver on the requisition.', old: 'It was hard to see who was part of the approval process.', do: 'Click **View Approvers**.' },
+    { s: 'approvers', t: 'nav-ssp', title: 'Navigate to SSP Homepage', now: 'From any page, click **Self Service Procurement** at the bottom left.', old: 'You had to find the small **Shop** button.', do: 'Click **Self Service Procurement**.' },
+    { s: 'ssp', t: 'search', setup: 'search', title: 'Items & Requisition Search', now: 'Search suggests items as you type and remembers your recent searches.', old: 'A basic catalog search.', do: 'Click the search bar.' },
+    { s: 'ssp', t: 'btn-ncr', title: 'Create Noncatalog Request', now: 'The request form has the same fields, with a cleaner layout.', old: 'Same steps, older screens.', do: 'Click **Create Noncatalog Request**.' },
+    { s: 'ncr', t: 'attach', title: 'Attachments & Notes to Supplier', now: 'Add attachments right on the request, including URL links.', old: 'Attachments opened in a pop-up. URLs could not be attached.', do: 'Click the **Attachments** section.' },
+    { s: 'ncr', t: 'nav-cart', title: 'Open Your Cart', now: 'You can open your cart from any screen.', old: 'You had to go back to the catalog page first.', do: 'Click **Cart**.' },
+    { s: 'cart', t: 'btn-dup', setup: 'select', title: 'Duplicate', now: 'Check a line, then click **Duplicate** to copy it.', old: 'You had to recreate the line by hand.', do: 'Click **Duplicate**.' },
+    { s: 'cart', t: 'btn-editsum', title: 'Edit Requisition', now: 'Edit the description, delivery, and charge account in one place.', old: 'Details were spread across several tabs.', do: 'Click the pencil icon.' },
+    { s: 'editReq', t: 'f-rdesc', title: 'Requisition Description', now: 'Enter the **Description** yourself. If you leave it empty, it stays blank.', old: 'It filled in from the first line item.', do: 'Click **Description**.' },
+    { s: 'editReq', t: 'f-urgent', title: 'Marking as Urgent', now: 'Check **Urgent** for time-sensitive requests. Approvers can see and filter them.', old: 'There was no way to mark a request as urgent.', do: 'Check **Urgent**.' },
+    { s: 'editReq', t: 'nav-myreq', title: 'My Requisitions', now: '**My Requisitions** is always at the bottom left.', old: 'It was small text on the catalog page.', do: 'Click **My Requisitions**.' },
+    { s: 'myReqs', t: 'status-chips', title: 'Detailed Requisition Status', now: 'See statuses like **Action Required** and filter by status or requester.', old: 'Only general statuses, like Approved or Pending.', do: 'Click any status.' }
+  ];
+  static OPT = {
+    itemType: ['Goods billed by quantity', 'Goods billed by amount', 'Services billed by amount'],
+    category: ['Admin - Computer - Equipment', 'Admin - Office Supplies', 'Facilities - Maintenance', 'Medical - Equipment', 'Medical - Supplies', 'Miscellaneous', 'Toys'],
+    uom: ['EACH', 'BOX', 'CASE', 'PACK'],
+    currency: ['USD', 'CAD'],
+    supplier: ['NORTHWIND MEDICAL SUPPLY', 'BLUE RIVER CLINICAL, INC.', 'EVERGREEN FACILITY SERVICES, LLC', 'SUMMIT OFFICE SUPPLY'],
+    attCat: ['Miscellaneous', 'To Approver', 'To Buyer', 'To Receiver', 'To Supplier', 'Internal to Requisition'],
+    locType: ['Internal', 'External'],
+    project: ['None', 'P-2047 Office Refresh', 'P-2052 Equipment Upgrade']
+  };
+  static blankForm() {
+    return { desc: '', itemType: 'Goods billed by quantity', category: '', qty: '1', uom: '', price: '', currency: 'USD', negotiated: false, newSupplier: false, supplier: '', site: '', contact: '', email: '', supItem: '', mfr: '', mfrPart: '', note: '', attCat: 'Internal to Requisition', url: '' };
+  }
+  mainRef = React.createRef();
+  coachRef = React.createRef();
+  state = {
+    screen: 'home', mode: 'explore', step: 0, tstep: 0, welcomeOpen: false, panelOpen: false,
+    f: Component.blankForm(), files: [], added: false, confirmAdd: false, confirmSubmit: false,
+    lines: [], sel: {}, req: { desc: '', justification: '', email: '', date: '', locType: 'Internal', loc: '', urgent: false, chargeTo: '', project: '', note: '' },
+    reqSeq: 66860, submittedReqs: [], lastReqNum: '', menuOpen: false, moreInfoOpen: false, newsOpen: true,
+    prefsOpen: false, prefLoc: '', loc: '', ltab: 'line', editIdx: 0, ld: {},
+    searchQ: '', searchFocus: false, toast: false, toastMsg: '', ring: null, confetti: false, doneKind: 'guided',
+    introOn: false, introScene: 0, tpCollapsed: false, introLeaving: false, coach: null, coachVis: true
+  };
+
+  tpListRef = React.createRef();
+  tpScroll() {
+    const el = this.tpListRef.current; const key = this.state.mode === 'guided' ? 'p' + (this.state.step + 1) : String(this.state.tstep + 1);
+    if (!el || this._tpLast === key + this.state.panelView) return;
+    this._tpLast = key + this.state.panelView;
+    setTimeout(() => { const row = el.querySelector('[data-tprow="' + key + '"]'); if (row) el.scrollTo({ top: Math.max(0, row.offsetTop - el.offsetTop - 12), behavior: 'smooth' }); }, 60);
+  }
+  componentDidMount() {
+    this._adv = (e) => {
+      const s = this.state, T = this.steps(); if (s.mode !== 'tour' || this._advancing) return;
+      const cur = T[s.tstep]; if (!cur || !e.target.closest) return;
+      if (!e.target.closest('[data-tgt="' + cur.t + '"]')) return;
+      this._advancing = true;
+      setTimeout(() => { this._advancing = false; if (this.state.tstep !== s.tstep) return; if (s.tstep >= T.length - 1) this.finishTour(); else this.tourGo(s.tstep + 1); }, 550);
+    };
+    document.addEventListener('click', this._adv, true);
+    this._tpTimer = setInterval(() => { if (this.state.mode === 'tour' && this.state.ring) this.forceUpdate(); }, 500);
+    const loc = this.props.location ?? 'Austin Support Center';
+    const m = this.props.startMode ?? 'welcome';
+    this.setState({ loc, prefLoc: loc, req: { ...this.state.req, loc } }, () => {
+      if (m === 'guided') this.startGuided(); else if (m === 'tour') this.startTour(); else if (m === 'explore') this.startExplore(); else this.setState({ introOn: true, introScene: 0 });
+    });
+    const loop = () => { this._raf = requestAnimationFrame(loop); try { this.measure(); } catch (e) {} };
+    this._raf = requestAnimationFrame(loop);
+  }
+  componentWillUnmount() { cancelAnimationFrame(this._raf); clearTimeout(this._tt); clearTimeout(this._ct); }
+  componentDidUpdate() {
+    this.tpScroll();
+    const s = this.state;
+    const k = [s.step, s.tstep, s.mode, s.screen, s.welcomeOpen].join('|');
+    if (k !== this._lastKey) {
+      this._lastKey = k; clearTimeout(this._st); this._st = setTimeout(() => this.scrollToTarget(), 80);
+      clearTimeout(this._fv); this.setState({ coachVis: false }); this._fv = setTimeout(() => this.setState({ coachVis: true }), 220);
+    }
+  }
+  curTarget() {
+    const s = this.state;
+    if (s.welcomeOpen || s.introOn) return null;
+    if (s.mode === 'guided') return Component.G[s.step]?.t;
+    if (s.mode === 'tour') return this.steps()[s.tstep]?.t;
+    return null;
+  }
+  measure() {
+    const t = this.curTarget();
+    let ring = null;
+    if (t) {
+      const el = document.querySelector('[data-tgt="' + t + '"]');
+      const mm = this.mainRef.current;
+      if (el && mm && mm.contains(el)) {
+        const mr0 = mm.getBoundingClientRect(), er0 = el.getBoundingClientRect();
+        if ((er0.bottom < mr0.top || er0.top > mr0.bottom) && Date.now() - (this._lastFix || 0) > 400) { this._lastFix = Date.now(); this.scrollToTarget(); }
+      }
+      if (el) {
+        const row = el.closest('[data-tabs-row]');
+        if (row) {
+          const rr = row.getBoundingClientRect(), er = el.getBoundingClientRect();
+          if (rr.width > 0 && (er.left < rr.left - 1 || er.right > rr.right + 1)) row.scrollLeft = Math.max(0, row.scrollLeft + (er.left - rr.left) - 20);
+        }
+        let r = el.getBoundingClientRect();
+        const cs = getComputedStyle(el);
+        if ((cs.backgroundColor === 'rgba(0, 0, 0, 0)' || cs.backgroundColor === 'transparent') && parseFloat(cs.borderTopWidth) === 0 && cs.boxShadow === 'none') {
+          const rg = document.createRange(); rg.selectNodeContents(el); const cr = rg.getBoundingClientRect();
+          if (cr.width > 4 && cr.height > 4) r = cr;
+        }
+        let top = r.top, bottom = r.bottom, left = r.left, right = r.right;
+        let a = el.parentElement;
+        while (a && a !== document.body) {
+          const cs = getComputedStyle(a);
+          if (cs.overflowX !== 'visible' || cs.overflowY !== 'visible') {
+            const ar = a.getBoundingClientRect();
+            top = Math.max(top, ar.top); bottom = Math.min(bottom, ar.bottom);
+            left = Math.max(left, ar.left); right = Math.min(right, ar.right);
+          }
+          a = a.parentElement;
+        }
+        if (bottom - top > 4 && right - left > 4) ring = { x: left, y: top, w: right - left, h: bottom - top };
+      }
+    }
+    const o = this.state.ring;
+    const same = (!o && !ring) || (o && ring && Math.abs(o.x - ring.x) < .5 && Math.abs(o.y - ring.y) < .5 && Math.abs(o.w - ring.w) < .5 && Math.abs(o.h - ring.h) < .5);
+    const vw = window.innerWidth, vh = window.innerHeight, CW = 340, P = 12, G = 22;
+    const ch = this.coachRef.current ? this.coachRef.current.offsetHeight : 220;
+    let c;
+    if (!ring) c = { x: vw - CW - 24, y: vh - ch - 84, side: 'none', ax: 0, ay: 0 };
+    else {
+      const R = { l: ring.x - P, t: ring.y - P, r: ring.x + ring.w + P, b: ring.y + ring.h + P };
+      const midY = (R.t + R.b) / 2, midX = Math.min((R.l + R.r) / 2, R.l + 80);
+      const clampY = y => Math.max(64, Math.min(vh - ch - 16, y));
+      const clampX = x => Math.max(16, Math.min(vw - CW - 16, x));
+      if (R.r + G + CW < vw - 12 && ring.h < vh * .5) c = { x: R.r + G, y: clampY(midY - 60), side: 'left' };
+      else if (R.l - G - CW > 12 && ring.h < vh * .5) c = { x: R.l - G - CW, y: clampY(midY - 60), side: 'right' };
+      else if (R.b + G + ch < vh - 12) c = { x: clampX(midX - 60), y: R.b + G, side: 'top' };
+      else if (R.t - G - ch > 56) c = { x: clampX(midX - 60), y: R.t - G - ch, side: 'bottom' };
+      else c = { x: vw - CW - 24, y: vh - ch - 84, side: 'none' };
+      c.ax = Math.max(20, Math.min(CW - 20, midX - c.x)); c.ay = Math.max(20, Math.min(ch - 20, midY - c.y));
+    }
+    const oc = this.state.coach;
+    const sameC = oc && Math.abs(oc.x - c.x) < .5 && Math.abs(oc.y - c.y) < .5 && oc.side === c.side && Math.abs(oc.ax - c.ax) < .5 && Math.abs(oc.ay - c.ay) < .5;
+    if (!same || !sameC) this.setState({ ring, coach: c });
+  }
+  scrollToTarget() {
+    const t = this.curTarget(); const main = this.mainRef.current;
+    if (!t || !main) return;
+    const el = document.querySelector('[data-tgt="' + t + '"]');
+    if (!el || !main.contains(el)) return;
+
+    const mr = main.getBoundingClientRect(), r = el.getBoundingClientRect();
+    if (r.top < mr.top + 30 || r.bottom > mr.bottom - 30) {
+      const want = main.scrollTop + r.top - mr.top - Math.max(40, (mr.height - Math.min(r.height, mr.height)) * 0.35);
+      main.scrollTo({ top: Math.max(0, want), behavior: 'smooth' });
+    }
+  }
+  toast(msg) {
+    clearTimeout(this._tt);
+    this.setState({ toast: true, toastMsg: msg || "This part of Oracle isn't in the practice yet." });
+    this._tt = setTimeout(() => this.setState({ toast: false }), 3200);
+  }
+  go(screen, extra) {
+    this.setState({ screen, menuOpen: false, searchFocus: false, prefsOpen: false, sspMenu: false, listDlg: false, ...(extra || {}) });
+    const m = this.mainRef.current;
+    if (m) { m.scrollTo({ top: m.scrollTop }); m.scrollTop = 0; requestAnimationFrame(() => { if (this.mainRef.current) this.mainRef.current.scrollTop = 0; }); }
+  }
+  hit(t) {
+    const s = this.state;
+    if (s.mode !== 'guided') return;
+    const st = Component.G[s.step];
+    if (st && st.t === t) this.advance();
+  }
+  advance() {
+    const s = this.state; const G = Component.G;
+    if (s.step >= G.length - 1) { this.finish('guided'); return; }
+    this.setState({ step: s.step + 1 }, () => this.restore(this.state.step));
+  }
+  restore(i) {
+    const st = Component.G[i]; if (!st) return;
+    const s = this.state;
+    const cartIdx = G_IDX('lines');
+    let extra = { confirmAdd: st.t === 'nav-cart', confirmSubmit: st.t === 'link-viewreq', menuOpen: st.t === 'menu-save', welcomeOpen: false };
+    if (st.t === 'btn-lupdate' || st.t === 'tab-dbd') extra.ltab = st.t === 'btn-lupdate' ? 'dbd' : 'line';
+    if (i >= G_IDX('nav-cart') && i < G_IDX('link-viewreq') && s.lines.length === 0) { this.commitLine(true); }
+    if (st.t === 'nav-cart') extra.added = true;
+    if (i < G_IDX('nav-cart') && st.s === 'ncr') extra.added = false;
+    if (st.t === 'tab-dbd' || st.t === 'btn-lupdate') { if (s.screen !== 'lineDetails') this.openLine(0); }
+    if (st.t === 'link-viewreq' && !s.lastReqNum) { this.doSubmit(true); }
+    if (s.screen !== st.s) this.go(st.s, extra); else this.setState(extra);
+    function G_IDX(t) { return Component.G.findIndex(g => g.t === t); }
+  }
+  static FL = {
+    hosted: [
+      { s: 'ssp', t: 'search', title: 'Search the Catalog', now: 'Use the search bar to find a desired item or service. Search by keyword, category, item number, and more.', do: 'Click the search bar.' },
+      { s: 'results', t: 'res-addcart', title: 'Add to Cart', now: 'Add a preferred item to your cart by clicking **Add to Cart**.', do: 'Click **Add to Cart**.' },
+      { s: 'results', t: 'nav-cart', title: 'Go to Cart', now: 'To go to cart, click **Cart** on the bottom left of the screen.', do: 'Click **Cart**.' },
+      { s: 'cart', t: 'btn-editsum', title: 'Edit the Requisition', now: 'To edit the Requisition, click the Pencil Icon at the top right of the page.', do: 'Click the pencil icon.' },
+      { s: 'editReq', t: 'f-rdesc', title: 'Add a Description', now: 'Add a description in the **Description** field to best describe your total purchase.', do: 'Click **Description**.' },
+      { s: 'editReq', t: 'btn-update', title: 'Save Details', now: 'After all details have been updated as needed, click **Update**.', do: 'Click **Update**.' },
+      { s: 'cart', t: 'btn-submit', title: 'Submit', now: 'Once all details are correct, click **Submit**.', do: 'Click **Submit**.' }
+    ],
+    list: [
+      { s: 'ssp', t: 'search', title: 'Find Items', now: 'Search for items you purchase frequently.', do: 'Click the search bar.' },
+      { s: 'results', t: 'res-check', title: 'Select Items', now: 'Select one or more items from the list.', do: 'Check an item.' },
+      { s: 'results', t: 'res-addlist', setup: 'sel', title: 'Add to Shopping List', now: 'Click **Add to Shopping List**.', do: 'Click **Add to Shopping List**.' },
+      { s: 'results', t: 'list-new', setup: 'dlg', title: 'Add to New List', now: 'From the Add to List screen, click **Add to New List**.', do: 'Click **Add to New List**.' },
+      { s: 'results', t: 'list-name', setup: 'dlg2', title: 'Name the List', now: 'Enter a name in the **New List Name** field.', do: 'Click **New List Name**.' },
+      { s: 'results', t: 'list-add', setup: 'dlg2', title: 'Save the List', now: 'Click **Add**.', do: 'Click **Add**.' },
+      { s: 'results', t: 'nav-ssp', title: 'Go to Self Service Procurement', now: 'Click the **Self Service Procurement** tab at the bottom of the screen.', do: 'Click **Self Service Procurement**.' },
+      { s: 'ssp', t: 'ssp-more', title: 'Open the Menu', now: 'Click the three dots icon in the upper right corner.', do: 'Click the three dots.' },
+      { s: 'ssp', t: 'menu-lists', setup: 'sspmenu', title: 'Open Shopping Lists', now: 'Choose **Shopping Lists**.', do: 'Click **Shopping Lists**.' },
+      { s: 'lists', t: 'list-row', title: 'Open Your List', now: 'The newly created Shopping List will display. Access it to add items to your cart.', do: 'Click your list.' }
+    ],
+    status: [
+      { s: 'ssp', t: 'nav-myreq', title: 'Open My Requisitions', now: '**My Requisitions** is always visible in the bottom left of the screen.', do: 'Click **My Requisitions**.' },
+      { s: 'myReqs', t: 'status-chips', title: 'Filter by Status', now: 'Use the filters for status, requester, and more.', do: 'Click any status.' }
+    ]
+  };
+  static PR = [
+    { k: 'hosted', title: 'Make a Hosted Catalog Purchase', sub: 'Search the catalog, add items, and submit' },
+    { k: 'ncr', title: 'Request a Non-Catalog Item', sub: 'Request an item that is not in a catalog' },
+    { k: 'list', title: 'Create a Shopping List', sub: 'Save items you purchase frequently' },
+    { k: 'status', title: 'Check a Requisition Status', sub: 'Filter your requisitions by status' }
+  ];
+  steps() { const f = this.state && this.state.flow; return f ? Component.FL[f] : Component.T; }
+  startFlow(k) {
+    if (k === 'ncr') { this.setState({ flow: null, ring: null }, () => this._startGuided()); return; }
+    this.setState({ flow: k, mode: 'tour', panelOpen: true, ring: null }, () => this.tourGo(0));
+  }
+  toMenu(doneKey) { this.setState(s => ({ mode: 'pmenu', flow: null, ring: null, pdone: doneKey ? { ...(s.pdone || {}), [doneKey]: true } : (s.pdone || {}) })); }
+  finish(kind) {
+    if (kind === 'guided') { this.toMenu('ncr'); this.toast('Nice work. Pick another practice or explore.'); return; }
+    clearTimeout(this._ct);
+    this.setState({ mode: 'done', doneKind: kind, confetti: kind === 'guided', panelOpen: true });
+    if (kind === 'guided') this._ct = setTimeout(() => this.setState({ confetti: false }), 3800);
+  }
+  resetData() {
+    const loc = this.state.loc;
+    return { f: Component.blankForm(), files: [], added: false, confirmAdd: false, confirmSubmit: false, lines: [], sel: {}, menuOpen: false, prefsOpen: false, searchQ: '', searchFocus: false,
+      req: { desc: '', justification: '', email: '', date: '', locType: 'Internal', loc, urgent: false, chargeTo: '', project: '', note: '' } };
+  }
+  closeIntro(cb) {
+    if (!this.state.introOn) { cb && cb(); return; }
+    this.setState({ introLeaving: true });
+    cb && cb();
+    setTimeout(() => this.setState({ introOn: false, introLeaving: false }), 650);
+  }
+  startGuided = () => this.closeIntro(() => this._startGuided());
+  _startGuided = () => { this.go('home', { ...this.resetData(), mode: 'guided', step: 0, welcomeOpen: false, panelOpen: true, confetti: false }); };
+  startTour = () => this.closeIntro(() => this._startTour());
+  _startTour = () => { this.setState({ mode: 'tour', welcomeOpen: false, panelOpen: true, confetti: false }, () => this.tourGo(0)); };
+  startExplore = () => this.closeIntro(() => this._startExplore());
+  _startExplore = () => { this.setState({ mode: 'explore', welcomeOpen: false, panelOpen: false, confetti: false }); if (this.state.screen === 'home') this.go('home'); };
+  sampleLine() {
+    return { desc: 'Nitrile exam gloves, medium, box of 100', category: 'Medical - Supplies', source: 'NORTHWIND MEDICAL SUPPLY', qty: '10', uom: 'BOX', price: '14.25', itemType: 'Goods billed by quantity', currency: 'USD', date: '', loc: this.state.loc, urgent: false, chargeTo: '' };
+  }
+  finishTour() { if (this.state.flow) { const k = this.state.flow; this.toMenu(k); this.go('ssp'); this.toast('Nice work. Pick another practice.'); return; } this.setState({ mode: 'explore', panelOpen: false }); this.go('ssp'); this.toast("That's everything. Click around to explore."); }
+  tourGo(i) {
+    const T = this.steps(); const st = T[i]; if (!st) return;
+    const extra = { tstep: i, menuOpen: false, confirmAdd: false, confirmSubmit: false, searchQ: '', searchFocus: false };
+    if (['cart', 'editReq', 'approvers'].includes(st.s) && this.state.lines.length === 0) extra.lines = [this.sampleLine()];
+    if (st.setup === 'search') { extra.searchQ = 'food'; extra.searchFocus = true; }
+    if (st.setup === 'select') extra.sel = { 0: true };
+    if (st.setup === 'menu') extra.menuOpen = true;
+    extra.listDlg = st.setup === 'dlg' || st.setup === 'dlg2'; extra.listNew = st.setup === 'dlg2'; extra.sspMenu = st.setup === 'sspmenu'; extra.resSel = st.setup === 'sel' || extra.listDlg;
+    this.go(st.s, extra);
+    if (st.setup === 'menu') setTimeout(() => this.setState({ menuOpen: true }), 30);
+    if (st.setup === 'sspmenu') setTimeout(() => this.setState({ sspMenu: true }), 30);
+    if (st.setup === 'dlg' || st.setup === 'dlg2' || st.setup === 'sel') setTimeout(() => this.setState({ listDlg: st.setup !== 'sel', listNew: st.setup === 'dlg2', resSel: true }), 30);
+    if (st.setup === 'search') setTimeout(() => this.setState({ searchQ: 'food', searchFocus: true }), 30);
+  }
+  setF(k, v) { this.setState(s => ({ f: { ...s.f, [k]: v } })); }
+  commitLine(silent) {
+    const f = this.state.f;
+    const line = {
+      desc: f.desc || 'Nitrile exam gloves, medium, box of 100', category: f.category || 'Medical - Supplies', source: f.supplier || 'NORTHWIND MEDICAL SUPPLY',
+      qty: f.qty || '1', uom: f.uom || 'EACH', price: f.price || '14.25', itemType: f.itemType, currency: f.currency || 'USD', date: '', loc: this.state.req.loc || this.state.loc, urgent: false, chargeTo: ''
+    };
+    this.setState(s => ({ lines: [...s.lines, line], added: true, confirmAdd: !silent }));
+  }
+  openLine(i) {
+    const l = this.state.lines[i] || this.sampleLine();
+    this.go('lineDetails', { editIdx: i, ld: { ...l }, ltab: 'line' });
+  }
+  doSubmit(silent) {
+    const s = this.state;
+    const num = 'RNU00' + s.reqSeq;
+    const total = s.lines.reduce((a, l) => a + (parseFloat(l.qty) || 0) * (parseFloat(String(l.price).replace(/[^0-9.]/g, '')) || 0), 0);
+    const rec = { num, desc: s.req.desc || (s.lines[0] ? '' : ''), amount: this.money(total) + ' USD', status: 'Pending approval' };
+    this.go('ssp', { submittedReqs: [rec, ...s.submittedReqs], lastReqNum: num, reqSeq: s.reqSeq + 1, lines: [], sel: {}, confirmSubmit: true, added: false,
+      req: { ...s.req, desc: '', justification: '', urgent: false, chargeTo: '', project: '', note: '' } });
+  }
+  money(n) { return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  segs(text) {
+    return String(text || '').split(/(\*\*[^*]+\*\*)/).filter(Boolean).map(p => p.startsWith('**') ? { t: p.slice(2, -2), st: { fontWeight: 700 } } : { t: p, st: { fontWeight: 'inherit' } });
+  }
+  cbStyle(on) {
+    return { width: '18px', height: '18px', boxSizing: 'border-box', border: on ? '1.5px solid #312d2a' : '1.5px solid #3b3733', borderRadius: '2px', background: on ? '#312d2a' : '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 'none' };
+  }
+  fillExample() {
+    const st = Component.G[this.state.step]; if (!st || !st.ex) return;
+    const [k, v] = st.ex;
+    if (k === 'pricing') this.setState(s => ({ f: { ...s.f, qty: '10', uom: 'BOX', price: '14.25', currency: 'USD' } }));
+    else if (k === 'source') this.setState(s => ({ f: { ...s.f, supplier: 'NORTHWIND MEDICAL SUPPLY', site: 'NORTHWIND - AUSTIN', contact: 'Customer Service', supItem: 'N/A' } }));
+    else if (k === 'rdesc') this.setState(s => ({ req: { ...s.req, desc: v } }));
+    else if (k === 'charge') this.setState(s => ({ req: { ...s.req, chargeTo: v } }));
+    else this.setF(k, v);
+  }
+  actions() {
+    if (this._acts) return this._acts;
+    const A = {
+      'tab-procurement': () => this.hit('tab-procurement'),
+      'tile-prnew': () => { this.go('ssp'); this.hit('tile-prnew'); },
+      'btn-ncr': () => { this.go('ncr', { f: Component.blankForm(), files: [], added: false, confirmAdd: false }); this.hit('btn-ncr'); },
+      'dropzone': () => { this.setState(s => ({ files: [...s.files, { name: 'Supplier Quote.pdf', cat: s.f.attCat }] })); this.hit('dropzone'); },
+      'btn-addcart': () => { if (!this.state.added) this.commitLine(false); this.hit('btn-addcart'); },
+      'nav-cart': () => { this.go('cart', { confirmAdd: false }); this.hit('nav-cart'); },
+      'btn-editsum': () => { this.go('editReq'); this.hit('btn-editsum'); },
+      'btn-update': () => { this.go('cart'); this.hit('btn-update'); },
+      'line-edit': () => { this.openLine(0); this.hit('line-edit'); },
+      'tab-dbd': () => { this.setState({ ltab: 'dbd' }); this.hit('tab-dbd'); },
+      'btn-lupdate': () => { this.saveLine(); this.hit('btn-lupdate'); },
+      'btn-more': () => { this.setState(s => ({ menuOpen: !s.menuOpen })); this.hit('btn-more'); },
+      'btn-submit': () => { if (!this.state.lines.length) { this.toast('Your cart is empty. Add an item before you submit.'); return; } this.doSubmit(false); this.hit('btn-submit'); },
+      'link-viewreq': () => { this.go('myReqs', { confirmSubmit: false }); this.hit('link-viewreq'); }
+    };
+    this._acts = A; return A;
+  }
+  saveLine() {
+    const s = this.state;
+    const lines = s.lines.map((l, i) => i === s.editIdx ? { ...l, ...s.ld } : l);
+    this.go('cart', { lines });
+  }
+  handlers() {
+    if (this._h) return this._h;
+    const keys = Object.keys(Component.blankForm());
+    const set = {}; keys.forEach(k => set[k] = v => this.setF(k, v));
+    const setR = {}; ['desc', 'justification', 'email', 'date', 'locType', 'loc', 'chargeTo', 'project', 'note'].forEach(k => setR[k] = v => this.setState(s => ({ req: { ...s.req, [k]: v } })));
+    const setL = {}; ['desc', 'category', 'qty', 'uom', 'price', 'currency', 'date', 'loc', 'chargeTo'].forEach(k => setL[k] = v => this.setState(s => ({ ld: { ...s.ld, [k]: v } })));
+    const tg = { negotiated: () => this.setF('negotiated', !this.state.f.negotiated), newSupplier: () => this.setF('newSupplier', !this.state.f.newSupplier) };
+    this._h = { set, setR, setL, tg };
+    return this._h;
+  }
+  renderVals() {
+    const s = this.state; const p = this.props; const A = this.actions(); const H = this.handlers();
+    const G = Component.G, T = this.steps();
+    const userName = p.userName ?? 'ACME User';
+    const initials = userName.split(/\s+/).filter(Boolean).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+    const hr = new Date().getHours();
+    const greeting = hr < 12 ? 'Good morning' : hr < 17 ? 'Good afternoon' : 'Good evening';
+    const notAvail = () => this.toast();
+    const screen = s.screen;
+    const nav = { ssp: screen === 'ssp' || screen === 'ncr', my: screen === 'myReqs', cart: ['cart', 'editReq', 'lineDetails', 'approvers'].includes(screen) };
+    const navTxtS = on => ({ color: on ? '#fff' : '#C6D3E6' });
+    const navIconS = on => ({ width: '24px', height: '24px', fill: 'none', stroke: on ? '#fff' : '#C6D3E6', strokeWidth: 1.5 });
+    const anySel = Object.values(s.sel).some(Boolean);
+    const allSel = s.lines.length > 0 && s.lines.every((l, i) => s.sel[i]);
+    const subtotal = s.lines.reduce((a, l) => a + (parseFloat(l.qty) || 0) * (parseFloat(String(l.price).replace(/[^0-9.]/g, '')) || 0), 0);
+    const lines = s.lines.map((l, i) => {
+      const pr = parseFloat(String(l.price).replace(/[^0-9.]/g, '')) || 0; const amt = (parseFloat(l.qty) || 0) * pr;
+      return {
+        line: i + 1, desc: l.desc, category: l.category, source: l.source, qty: l.qty, uom: l.uom,
+        priceStr: this.money(pr) + ' ' + (l.currency || 'USD'), amountStr: this.money(amt) + ' ' + (l.currency || 'USD'), amountUsd: '$' + this.money(amt),
+        sel: !!s.sel[i], cb: this.cbStyle(!!s.sel[i]),
+        rowStyle: { display: 'grid', gridTemplateColumns: '44px 84px minmax(150px,1.6fr) minmax(90px,1fr) minmax(130px,1.2fr) 130px 90px minmax(110px,1fr) minmax(130px,1.2fr) minmax(110px,1fr) 64px 80px', alignItems: 'center', minHeight: '64px', fontSize: '17px', borderBottom: '1px solid #e3dfdb', background: s.sel[i] ? '#eef3f6' : 'transparent' },
+        toggle: () => this.setState(st => ({ sel: { ...st.sel, [i]: !st.sel[i] } })),
+        onQty: e => { const v = e.target.value; this.setState(st => ({ lines: st.lines.map((x, j) => j === i ? { ...x, qty: v } : x) })); },
+        edit: () => { if (i === 0) A['line-edit'](); else this.openLine(i); },
+        editTgt: i === 0 ? 'line-edit' : 'line-edit-' + i,
+        delivery: () => { this.openLine(i); this.setState({ ltab: 'dbd' }); }
+      };
+    });
+    const tbOn = anySel;
+    const tbBtn = { height: '38px', padding: '0 16px', boxSizing: 'border-box', border: '1px solid ' + (tbOn ? '#8d8883' : '#d7d3cf'), borderRadius: '4px', display: 'flex', alignItems: 'center', fontSize: '15px', fontWeight: 600, color: tbOn ? '#161513' : '#a9a4a0', cursor: tbOn ? 'pointer' : 'default', background: tbOn ? '#fff' : 'transparent' };
+    const tbIcon = { width: '38px', height: '38px', boxSizing: 'border-box', border: '1px solid ' + (tbOn ? '#8d8883' : '#d7d3cf'), borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: tbOn ? 'pointer' : 'default', background: tbOn ? '#fff' : 'transparent' };
+    const recent = ['Dog and cat food', 'Exam gloves'];
+    const catalog = ['Hand Soap Refill, Unscented, 1 Gallon (Min Order Qty 4)', 'Paper Towel Rolls, 2-Ply, Case of 12 (Min Order Qty 2)', 'Nitrile Exam Gloves, Medium, Box of 100', 'Copy Paper, 8.5 x 11, Case of 10 Reams', 'Paper Towels, Multifold, Case of 16', 'Disinfecting Wipes, Canister of 160'];
+    const q = s.searchQ.trim().toLowerCase();
+    const split = (txt) => { const i = q ? txt.toLowerCase().indexOf(q) : -1; return i < 0 ? { pre: txt, match: '', post: '' } : { pre: txt.slice(0, i), match: txt.slice(i, i + q.length), post: txt.slice(i + q.length) }; };
+    const pickS = (txt) => (e) => { e.preventDefault(); this.setState({ searchQ: txt, searchFocus: false }); this.toast('Search results aren\'t in the practice yet.'); };
+    const sugg = [
+      ...recent.filter(r => !q || r.toLowerCase().includes(q)).map(r => ({ recent: true, predict: false, ...split(r), pick: pickS(r) })),
+      ...(q ? catalog.filter(c => c.toLowerCase().includes(q)).slice(0, 4).map(c => ({ recent: false, predict: true, ...split(c), pick: pickS(c) })) : [])
+    ];
+    const gst = G[s.step] || G[0];
+    const tst = T[s.tstep] || T[0];
+    const isGuided = s.mode === 'guided', isTour = s.mode === 'tour', isDone = s.mode === 'done';
+    const exText = gst.ex ? gst.ex[1] : '';
+    let ringEl = null;
+    if (s.ring && (s.mode === 'tour' || s.mode === 'guided')) {
+      const mr = this.mainRef.current ? this.mainRef.current.getBoundingClientRect() : null;
+      const r0 = s.ring, maxR = mr ? mr.right - 14 : 1e9;
+      const r = { ...r0, w: Math.max(20, Math.min(r0.w, maxR - r0.x)) };
+      const ease = 'cubic-bezier(.65,0,.25,1)', tr = '.5s ' + ease;
+      ringEl = React.createElement('div', { key: 'hs', style: { position: 'fixed', left: r.x - 2, top: r.y - 2, width: r.w + 4, height: r.h + 4, pointerEvents: 'none', zIndex: 59, transition: 'left ' + tr + ', top ' + tr + ', width ' + tr + ', height ' + tr } },
+        React.createElement('div', { style: { position: 'absolute', inset: 0, borderRadius: 6, animation: 'acmeglow 2.4s ease-out infinite' } }));
+      const gd = s.mode === 'guided';
+      const cur = gd ? { do: (Component.G[s.step] || {}).x, setup: (Component.G[s.step] || {}).t === 'menu-save' ? 'menu' : '' } : (this.steps()[s.tstep] || {});
+      const isNext = gd && (Component.G[s.step] || {}).a === 'next';
+      const vh = window.innerHeight, G = 8;
+      const maxX = (mr ? mr.right : window.innerWidth) - 12;
+      const plain = String(cur.do || '').replace(/\*\*/g, '');
+      const wrap = gd && plain.length > 34;
+      const tw = wrap ? 300 : Math.min(300, Math.ceil(plain.length * 8.2) + 34), th = wrap ? Math.ceil(plain.length / 36) * 21 + 26 + (isNext ? 44 : 0) : 46 + (isNext ? 44 : 0);
+      const upRoom = r.y - th - G >= 12;
+      const rightFit = r.x + r.w - 14 + tw <= maxX;
+      const ax0 = rightFit ? Math.max(r.x + r.w - 14, r.x + 10) : Math.max(12, Math.min(r.x + 14, maxX) - tw);
+      let pos, arrow;
+      if (cur.setup === 'menu') { pos = { left: Math.max(12, r.x - tw - G), top: Math.max(12, r.y + r.h / 2 - 23) }; arrow = { top: 17, right: -7, transform: 'rotate(135deg)' }; }
+      else if (upRoom) { pos = { left: ax0, bottom: vh - r.y + G }; arrow = { [rightFit ? 'left' : 'right']: 12, bottom: -7, transform: 'rotate(225deg)' }; }
+      else { pos = { left: ax0, top: Math.min(r.y + r.h + G, vh - th - 12) }; arrow = { [rightFit ? 'left' : 'right']: 12, top: -7, transform: 'rotate(45deg)' }; }
+      const V = this.props.tipStyle || 'blue';
+      const SK = { navy: { bg: '#326DC2', fg: '#fff', bd: '#326DC2', sh: '0 8px 22px rgba(16,32,58,.35)', fw: 400 }, blue: { bg: '#F28C28', fg: '#2C2E31', bd: '#F28C28', sh: '0 8px 22px rgba(242,140,40,.45)', fw: 400 }, outline: { bg: '#fff', fg: '#2C2E31', bd: '#326DC2', sh: '0 10px 28px rgba(16,32,58,.28)', fw: 400 } }[V] || {};
+      const bw = V === 'outline' ? '2px' : '1px';
+      const parts = String(cur.do || '').split(/(\*\*[^*]+\*\*)/).filter(Boolean).map((p, i) => p.startsWith('**') ? React.createElement('b', { key: i, style: { fontWeight: 800 } }, p.slice(2, -2)) : p);
+      const tipEl = React.createElement('div', { key: 'tip' + s.mode + (gd ? s.step : s.tstep), style: { position: 'fixed', ...pos, width: tw, minHeight: 46, borderRadius: 4, boxSizing: 'border-box', background: SK.bg, color: SK.fg, border: bw + ' solid ' + SK.bd, boxShadow: SK.sh, fontWeight: SK.fw, padding: wrap || isNext ? '12px 16px' : '0 16px', display: wrap || isNext ? 'block' : 'flex', alignItems: 'center', whiteSpace: wrap ? 'normal' : 'nowrap', fontFamily: "'Segoe UI Variable','Segoe UI',-apple-system,Arial,sans-serif", fontSize: 15, lineHeight: 1.4, zIndex: 60, pointerEvents: isNext ? 'auto' : 'none', animation: 'acmetip .35s cubic-bezier(.2,.8,.2,1) both' } },
+        React.createElement('div', { style: { position: 'absolute', ...arrow, width: 12, height: 12, background: SK.bg, borderLeft: bw + ' solid ' + SK.bd, borderTop: bw + ' solid ' + SK.bd } }),
+        React.createElement('div', { style: wrap || isNext ? {} : { lineHeight: '44px' } }, parts),
+        isNext ? React.createElement('div', { onClick: () => this.advance(), style: { marginTop: 10, display: 'inline-flex', alignItems: 'center', height: 32, padding: '0 14px', borderRadius: 4, background: V === 'outline' ? '#326DC2' : '#fff', color: V === 'outline' ? '#fff' : (V === 'navy' ? '#326DC2' : '#9A4409'), fontSize: 14, fontWeight: 700, cursor: 'pointer' } }, 'Next') : null);
+      ringEl = [ringEl, tipEl];
+    }
+    let confettiEl = null;
+    if (s.confetti) {
+      const cols = ['#326DC2', '#5F646A', '#5F646A', '#5F646A', '#326DC2'];
+      const bits = Array.from({ length: 48 }, (_, i) => React.createElement('span', { key: i, style: { position: 'absolute', top: -20, left: ((i * 37) % 100) + '%', width: 8 + (i % 3) * 3, height: 12 - (i % 3) * 2, background: cols[i % cols.length], borderRadius: 2, animation: 'acmefall ' + (2.2 + (i % 5) * 0.35) + 's ' + ((i % 8) * 0.12) + 's ease-in forwards' } }));
+      confettiEl = React.createElement('div', { key: 'conf', style: { position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 80, overflow: 'hidden' } }, bits);
+    }
+    const lastReq = s.submittedReqs[0];
+    const myReqs = s.submittedReqs.length ? s.submittedReqs.map(r => ({ ...r, badge: { fontSize: '13px', fontWeight: 600, padding: '4px 10px', borderRadius: '12px', background: '#fdf0d8', color: '#7a4a00' } }))
+      : [{ num: 'RNU00' + s.reqSeq, desc: s.req.desc, amount: this.money(subtotal) + ' USD', status: 'Incomplete', badge: { fontSize: '13px', fontWeight: 600, padding: '4px 10px', borderRadius: '12px', background: '#e8e6e3', color: '#3b3733' } }];
+    const ld = s.ld || {};
+    const ltabS = on => ({ paddingBottom: '10px', borderBottom: on ? '3px solid #161513' : '3px solid transparent', color: on ? '#161513' : '#4f4b47', cursor: 'pointer' });
+    return {
+      userName, initials, greeting, loc: s.loc, mainRef: this.mainRef,
+      notAvail, notAvailOld: () => this.toast('The older Requisitions page isn\'t in the practice. Use Purchase Requisitions (New).'),
+      goHome: () => this.go('home'),
+      isHome: screen === 'home', isSsp: screen === 'ssp', isNcr: screen === 'ncr', isCart: screen === 'cart', isEditReq: screen === 'editReq', isLine: screen === 'lineDetails', isApprovers: screen === 'approvers', isResults: screen === 'results', isLists: screen === 'lists',
+      resQuery: s.searchQ || 'gloves', listDlg: !!s.listDlg, listNew: !!s.listNew, sspMenu: !!s.sspMenu,
+      toggleSspMenu: () => this.setState(st => ({ sspMenu: !st.sspMenu })), goLists: () => this.go('lists'), goSspBack: () => this.go('ssp'),
+      openListDlg: () => this.setState({ listDlg: true, listNew: false }), closeListDlg: () => this.setState({ listDlg: false }),
+      listNewOn: () => this.setState({ listNew: true }), listAdd: () => { this.setState({ listDlg: false }); this.toast('Added to Exam Room Supplies.'); },
+      listOpen: () => this.toast('Your list opens here. Add items from it to your cart.'),
+      products: [['Nitrile Exam Gloves, Medium, Box of 100', '$14.25'], ['Gauze Sponges 4x4, 200 Count', '$9.80'], ['Surgical Face Masks, Box of 50', '$7.15'], ['Alcohol Prep Pads, Box of 200', '$5.30']].map(([name, price], i) => { const on = i === 0 && !!s.resSel; return { name, price, supplier: 'NORTHWIND MEDICAL SUPPLY', checkTgt: i === 0 ? 'res-check' : '', addTgt: i === 0 ? 'res-addcart' : '',
+        check: () => { if (i === 0) this.setState(st => ({ resSel: !st.resSel })); },
+        add: () => { this.setState(st => ({ lines: st.lines.length ? st.lines : [this.sampleLine()] })); this.toast('Added to cart.'); },
+        cb: { width: '22px', height: '22px', borderRadius: '3px', border: on ? '1.5px solid #312d2a' : '1.5px solid #8d8883', background: on ? '#312d2a' : '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxSizing: 'border-box' } }; }), isMyReqs: screen === 'myReqs',
+      showNav: screen !== 'home',
+      actTabProc: A['tab-procurement'], actTilePrNew: A['tile-prnew'], actNcr: A['btn-ncr'], actDrop: A['dropzone'], actAddCart: A['btn-addcart'],
+      actNavCart: A['nav-cart'], actEditSum: A['btn-editsum'], actUpdate: A['btn-update'], actTabDbd: A['tab-dbd'], actLineUpdate: A['btn-lupdate'],
+      actMore: A['btn-more'], actSubmit: A['btn-submit'], actViewReq: A['link-viewreq'],
+      actNavSsp: () => this.go('ssp'), actNavMy: () => this.go('myReqs'),
+      goCart: () => this.go('cart'), goApprovers: () => this.go('approvers'),
+      saveLater: () => { this.setState({ menuOpen: false }); if (s.mode === 'guided' && gst.t === 'menu-save') { this.advance(); return; } this.toast('Saved for later. In Oracle, find it in My Requisitions.'); },
+      ncrCancel: () => this.go('ssp'),
+      openPrefs: () => this.setState({ prefsOpen: true, prefLoc: s.loc }), closePrefs: () => this.setState({ prefsOpen: false }),
+      updatePrefs: () => this.setState(st => ({ prefsOpen: false, loc: st.prefLoc, req: { ...st.req, loc: st.prefLoc } })),
+      prefLoc: s.prefLoc, setPrefLoc: v => this.setState({ prefLoc: v }),
+      newsOpen: s.newsOpen, toggleNews: () => this.setState(st => ({ newsOpen: !st.newsOpen })),
+      newsChevron: { width: '22px', height: '22px', fill: 'none', stroke: '#161513', strokeWidth: 2, transform: s.newsOpen ? 'none' : 'rotate(-90deg)' },
+      searchQ: s.searchQ, onSearch: e => this.setState({ searchQ: e.target.value }), searchFocusOn: () => this.setState({ searchFocus: true }),
+      searchFocusOff: () => setTimeout(() => { if (s.mode !== 'tour' || (T[this.state.tstep] || {}).setup !== 'search') this.setState({ searchFocus: false }); }, 150),
+      searchKey: e => { if (e.key === 'Enter') this.go('results'); },
+      showSugg: s.searchFocus && sugg.length > 0, sugg,
+      f: s.f, set: H.set, setR: H.setR, setL: H.setL, tg: H.tg,
+      opt: { ...Component.OPT, loc: [s.loc === 'Austin Support Center' ? s.loc : s.loc, ...['Austin Support Center', 'Lakeside Clinic', 'Specialty site (practice example)'].filter(x => x !== s.loc)] },
+      cb: { negotiated: this.cbStyle(s.f.negotiated), newSupplier: this.cbStyle(s.f.newSupplier), urgent: this.cbStyle(s.req.urgent), lineUrgent: this.cbStyle(!!ld.urgent) },
+      files: s.files.map((fl, i) => ({ ...fl, remove: () => this.setState(st => ({ files: st.files.filter((_, j) => j !== i) })) })),
+      addUrl: () => { if (!s.f.url.trim()) { this.toast('Paste a link in URL first.'); return; } this.setState(st => ({ files: [...st.files, { name: st.f.url, cat: st.f.attCat }], f: { ...st.f, url: '' } })); },
+      notAdded: !s.added, added: s.added,
+      confirmAdd: s.confirmAdd && screen === 'ncr', closeConfirmAdd: () => this.setState({ confirmAdd: false }),
+      another: () => this.go('ncr', { f: Component.blankForm(), files: [], added: false, confirmAdd: false }),
+      anotherSame: () => { const f0 = s.f; this.go('ncr', { f: { ...Component.blankForm(), supplier: f0.supplier, site: f0.site, contact: f0.contact, email: f0.email, newSupplier: f0.newSupplier }, files: [], added: false, confirmAdd: false }); },
+      confirmSubmit: s.confirmSubmit && screen === 'ssp', closeConfirmSubmit: () => this.setState({ confirmSubmit: false }), lastReqNum: s.lastReqNum,
+      reqNum: 'RNU00' + s.reqSeq, req: s.req, subtotal: '$' + this.money(subtotal), chargeText: s.req.chargeTo || 'Charge account not derived',
+      moreInfoOpen: s.moreInfoOpen, toggleMoreInfo: () => this.setState(st => ({ moreInfoOpen: !st.moreInfoOpen })),
+      moreInfoChevron: { width: '22px', height: '22px', fill: 'none', stroke: '#161513', strokeWidth: 2.2, transform: s.moreInfoOpen ? 'rotate(90deg)' : 'none' },
+      menuOpen: s.menuOpen,
+      moreBtnStyle: { width: '38px', height: '38px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', borderRadius: '4px', background: s.menuOpen ? 'rgba(255,255,255,.15)' : 'transparent' },
+      lines, noLines: lines.length === 0, allSel, cbAll: this.cbStyle(allSel),
+      toggleAll: () => this.setState(st => { const on = !(st.lines.length && st.lines.every((l, i) => st.sel[i])); const sel = {}; st.lines.forEach((l, i) => sel[i] = on); return { sel }; }),
+      tbBtn, tbIcon, trashStyle: { width: '20px', height: '20px', fill: 'none', stroke: tbOn ? '#161513' : '#a9a4a0', strokeWidth: 1.5 },
+      actDuplicate: () => { if (!anySel) return; this.setState(st => { const add = st.lines.filter((l, i) => st.sel[i]).map(l => ({ ...l })); return { lines: [...st.lines, ...add], sel: {} }; }); },
+      deleteSel: () => { if (!anySel) return; this.setState(st => ({ lines: st.lines.filter((l, i) => !st.sel[i]), sel: {} })); },
+      notAvailIfSel: () => { if (anySel) this.toast(); },
+      firstSupplier: s.lines[0] ? s.lines[0].source : '', tgUrgent: () => this.setState(st => ({ req: { ...st.req, urgent: !st.req.urgent } })),
+      ld: { ...ld, urgent: !!ld.urgent }, tgLineUrgent: () => this.setState(st => ({ ld: { ...st.ld, urgent: !st.ld.urgent } })),
+      ltabLine: s.ltab === 'line', ltabDbd: s.ltab === 'dbd', lineTabLine: () => this.setState({ ltab: 'line' }),
+      ltabLineStyle: ltabS(s.ltab === 'line'), ltabDbdStyle: ltabS(s.ltab === 'dbd'),
+      approvers: [
+        { group: true, person: false, submit: false, over: '', name: 'Application', rule: 'Header First Responder Wins: ', ruleVal: 'ACMECorpUnder750kAutoApprove' },
+        { group: true, person: false, submit: false, over: '', name: 'Application', rule: 'Header Stage First Responder Wins: ', ruleVal: 'ACMECorpUnder250kAutoApprove' },
+        { group: false, person: true, submit: false, over: '', name: 'Dana Whitfield', rule: 'Preapproval Header Hierarchy: ', ruleVal: 'ACMECorpOver75kTwoManagerApproval' },
+        { group: false, person: true, submit: false, over: '', name: 'Marcus Lee', rule: 'Preapproval Header Hierarchy: ', ruleVal: 'ACMECorpOver75kTwoManagerApproval' },
+        { group: false, person: false, submit: true, over: 'Submitted By', name: 'You', rule: '', ruleVal: '' }
+      ],
+      chips: [{ a: 'Requisition Status', b: 'Approved', n: '0' }, { a: 'Line Status', b: 'Approved', n: '0' }, { a: 'Action Required', b: 'Create change order', n: '0' }, { a: 'Requisition Status', b: 'Pending approval', n: String(s.submittedReqs.length) }, { a: 'Urgent', b: 'Yes', n: '0' }],
+      myReqs, reqCountText: myReqs.length === 1 ? '1 item' : myReqs.length + ' items',
+      navSspOn: nav.ssp, navMyOn: nav.my, navCartOn: nav.cart,
+      navTxt: { ssp: navTxtS(nav.ssp), my: navTxtS(nav.my), cart: navTxtS(nav.cart) },
+      navIcon: { ssp: navIconS(nav.ssp), my: navIconS(nav.my), cart: navIconS(nav.cart) },
+      hasCount: s.lines.length > 0, cartCount: s.lines.length,
+      toast: s.toast, toastMsg: s.toastMsg,
+      showLauncher: s.mode === 'explore' && !s.introOn, openWelcome: () => this.startTour(),
+      welcomeOpen: s.welcomeOpen, startGuided: this.startGuided, startTour: this.startTour, startExplore: this.startExplore,
+      panelOpen: s.panelOpen && (p.showGuidePanel ?? true) && s.mode !== 'explore',
+      exitGuide: () => this.setState({ mode: 'explore', panelOpen: false, confetti: false }),
+      panelTitle: isGuided ? 'Request a Non-Catalog Item' : isTour ? "What's New in Self-Service Procurement" : (s.doneKind === 'tour' ? 'Tour complete' : 'Request complete'),
+      showProgress: isGuided || isTour,
+      progressLabel: isGuided ? 'Step ' + (s.step + 1) + ' of ' + G.length : 'Change ' + (s.tstep + 1) + ' of ' + T.length,
+      progressSection: isGuided ? gst.sec : '',
+      progressFill: { height: '100%', background: '#326DC2', borderRadius: '2px', transition: 'width .3s', width: (isGuided ? (s.step + 1) / G.length : (s.tstep + 1) / T.length) * 100 + '%' },
+      isGuided, isTour, isDone,
+      gSegs: this.segs(gst.x), gHasTip: !!gst.tip, gTipSegs: this.segs(gst.tip), gHasEx: !!gst.ex, gExText: exText, gFill: () => this.fillExample(),
+      gHint: gst.a === 'click' ? 'Click where the orange arrow points.' : 'When you are ready, click Next.',
+      gDot: { width: '10px', height: '10px', borderRadius: '50%', border: '2px solid #FF6A00', background: gst.a === 'click' ? '#FF6A00' : 'transparent', flex: 'none' },
+      gTotal: G.length,
+      tTitle: tst.title, tOldSegs: this.segs(tst.old), tNewSegs: this.segs(tst.now), tHasImg: !!tst.img, tImgStyle: { width: '100%', aspectRatio: '16 / 9', marginTop: '12px', border: '0.5px solid #a9a9a9', borderRadius: '4px', backgroundColor: '#fff', backgroundImage: tst.img ? 'url("' + tst.img + '")' : 'none', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' },
+      doneTitle: s.doneKind === 'tour' ? "That's the tour" : 'You submitted a practice requisition',
+      doneText: s.doneKind === 'tour' ? 'You saw the main changes to Self-Service Procurement. Your steps for creating a requisition stay the same.' : 'You requested a non-catalog item from start to finish. In Oracle, your requisition now goes to your approvers. Nothing was sent from this practice.',
+      showFooter: isGuided || isTour,
+      backStyle: { height: '34px', padding: '0 10px', borderRadius: '6px', color: '#326DC2', display: 'flex', alignItems: 'center', fontSize: '14px', fontWeight: 600, cursor: 'pointer', opacity: (isGuided ? s.step : s.tstep) === 0 ? 0.35 : 1 },
+      nextLabel: isGuided ? (s.step === G.length - 1 ? 'Finish' : 'Next') : (s.tstep === T.length - 1 ? 'Finish tour' : 'Next'),
+      panelNext: () => {
+        if (isGuided) { if (gst.a === 'click' && A[gst.t]) A[gst.t](); else this.advance(); }
+        else if (isTour) { if (s.tstep >= T.length - 1) { this.go('ssp'); this.finish('tour'); } else this.tourGo(s.tstep + 1); }
+      },
+      panelBack: () => {
+        if (isGuided && s.step > 0) this.setState({ step: s.step - 1 }, () => this.restore(this.state.step));
+        else if (isTour && s.tstep > 0) this.tourGo(s.tstep - 1);
+      },
+      ringEl, confettiEl, coachRef: this.coachRef,
+      tpWrap: { width: ((s.mode === 'tour' || s.mode === 'guided' || s.mode === 'pmenu') && !s.tpCollapsed && !s.introOn) ? '380px' : '0px', flex: 'none', overflow: 'hidden', transition: 'width .4s cubic-bezier(.65,0,.25,1)', position: 'relative', zIndex: 57, boxShadow: '-6px 0 20px rgba(16,32,58,.12)' },
+      tpTab: (s.mode === 'tour' || s.mode === 'guided' || s.mode === 'pmenu') && s.tpCollapsed,
+      tpCollapse: () => this.setState({ tpCollapsed: true }), tpExpand: () => this.setState({ tpCollapsed: false }),
+      tpListRef: this.tpListRef,
+      tpSegs: T.map((x, i) => ({ st: { flex: 1, height: '100%', background: i <= s.tstep ? ['#62A2F7','#5F646A','#5F646A','#5F646A'][i % 4] : 'rgba(255,255,255,.18)', transition: 'background .3s' } })),
+      tpPct: Math.round((s.tstep + 1) / T.length * 100),
+      tourList: T.map((x, i) => { const on = i === s.tstep, past = i < s.tstep; const doSegs = this.segs(x.do || ''); const g = ({"ssp":["Homepage","#326DC2"],"noncat":["Request","#bf4cb1"],"cart":["Cart","#9A6416"],"myreq":["Requisitions","#498b48"]})[x.s] || ['Cart','#9A6416']; return { n: i + 1, title: x.title, on, doSegs, tag: g[0], tagSt: { fontSize: '11px', fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: g[1] }, tagDot: { width: '8px', height: '8px', borderRadius: '50%', background: g[1], flex: 'none' }, now: this.segs(x.now), old: this.segs(x.old), go: () => this.tourGo(i),
+        row: { padding: '14px 20px', borderBottom: '1px solid #F8F9FA', cursor: 'pointer', background: on ? '#FDF8F0' : '#fff', boxShadow: 'none' },
+        num: { width: '26px', height: '26px', borderRadius: '50%', flex: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '13px', fontWeight: 700, background: on || past ? '#326DC2' : '#fff', color: on || past ? '#fff' : '#326DC2', border: on || past ? 'none' : '1.5px solid #326DC2', opacity: past ? .55 : 1, boxSizing: 'border-box' },
+        titleSt: { flex: 1, minWidth: 0, fontSize: '15px', fontWeight: on ? 700 : 500, lineHeight: 1.3, color: '#2C2E31' } }; }),
+      tpCount: s.mode === 'guided' ? (s.step + 1) + ' of ' + Component.G.length : (s.tstep + 1) + ' of ' + T.length,
+      isNewView: s.mode === 'tour' && !s.flow, isPracView: s.mode === 'guided',
+      footOn: s.mode !== 'pmenu', isFlowView: s.mode === 'tour' && !!s.flow, isPmenu: s.mode === 'pmenu', inPractice: s.mode === 'guided' || (s.mode === 'tour' && !!s.flow),
+      practiceName: s.mode === 'guided' ? 'Request a Non-Catalog Item' : s.flow ? (Component.PR.find(p => p.k === s.flow) || {}).title : '',
+      backToMenu: () => this.toMenu(),
+      prList: Component.PR.map(p => ({ title: p.title, sub: p.sub, done: !!(s.pdone || {})[p.k], go: () => this.startFlow(p.k) })),
+      panelTitle: s.mode === 'guided' ? 'Practice' : "What's New",
+      pvHome: (this.state.panelView || 'home') === 'home', pvList: (this.state.panelView || 'home') !== 'home',
+      goPvHome: () => this.setState({ panelView: 'home' }),
+      pickNew: () => { if (s.mode === 'tour' && !s.flow) return; this.setState({ flow: null, ring: null }, () => this._startTour()); },
+      pickPractice: () => { if (s.mode === 'pmenu' || s.mode === 'guided' || s.flow) return; this.toMenu(); },
+      tabNewSt: { flex: 1, textAlign: 'center', padding: '12px 0 10px', fontSize: '14px', fontWeight: 600, cursor: 'pointer', color: (s.mode === 'tour' && !s.flow) ? '#fff' : '#A3BBDD', background: (s.mode === 'tour' && !s.flow) ? '#326DC2' : 'transparent', borderRadius: 0 },
+      tabPracSt: { flex: 1, textAlign: 'center', padding: '12px 0 10px', fontSize: '14px', fontWeight: 600, cursor: 'pointer', color: !(s.mode === 'tour' && !s.flow) ? '#fff' : '#A3BBDD', background: !(s.mode === 'tour' && !s.flow) ? '#326DC2' : 'transparent', borderRadius: 0 },
+      chNewSt: { display: 'flex', alignItems: 'center', gap: '10px', padding: '14px 20px', background: s.mode !== 'guided' ? '#326DC2' : '#F8F9FA', color: s.mode !== 'guided' ? '#fff' : '#2C2E31', cursor: 'pointer', position: 'sticky', top: 0, zIndex: 2 },
+      chPracSt: { display: 'flex', alignItems: 'center', gap: '10px', padding: '14px 20px', background: s.mode === 'guided' ? '#326DC2' : '#F8F9FA', color: s.mode === 'guided' ? '#fff' : '#2C2E31', cursor: 'pointer', position: 'sticky', top: 0, zIndex: 2 },
+      practiceList: Component.G.map((g, i) => { const on = s.mode === 'guided' && i === s.step, past = s.mode === 'guided' && i < s.step; return { key: 'p' + (i + 1), n: i + 1, sec: g.sec, secHead: i === 0 || Component.G[i - 1].sec !== g.sec, on, x: this.segs(g.x),
+        go: () => { if (s.mode !== 'guided') this._startGuided(); setTimeout(() => this.setState({ step: i }, () => this.restore(i)), 30); },
+        row: { padding: '11px 20px', cursor: 'pointer', background: on ? '#FDF8F0' : '#fff', borderBottom: '1px solid #F8F9FA' },
+        num: { width: '24px', height: '24px', borderRadius: '50%', flex: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 700, background: on || past ? '#326DC2' : '#fff', color: on || past ? '#fff' : '#326DC2', border: on || past ? 'none' : '1.5px solid #326DC2', boxSizing: 'border-box', opacity: past ? .55 : 1 },
+        txt: { flex: 1, minWidth: 0, fontSize: '14px', lineHeight: 1.45, color: on ? '#2C2E31' : '#5A6F8E', fontWeight: on ? 500 : 400 } }; }),
+      tpBack: { fontSize: '14px', fontWeight: 600, color: '#265c66', cursor: 'pointer', opacity: (s.mode === 'guided' ? s.step : s.tstep) === 0 ? .35 : 1 },
+      tpNextLabel: s.tstep === T.length - 1 ? 'Finish' : 'Next →',
+      tpNext: () => { if (s.tstep >= T.length - 1) { this.setState({ mode: 'explore', panelOpen: false }); this.go('ssp'); this.toast('Tour done. Click around to explore.'); } else this.tourGo(s.tstep + 1); },
+      coachOn: (s.mode === 'guided' || s.mode === 'tour') && !s.introOn,
+      coachStyle: (() => { const c = s.coach || { x: 24, y: 80 }; return { position: 'fixed', left: c.x + 'px', top: c.y + 'px', width: '340px', zIndex: 65, fontFamily: "'Segoe UI Variable','Segoe UI',-apple-system,'Helvetica Neue',Arial,sans-serif", borderRadius: '12px', boxShadow: '0 18px 50px rgba(0,0,0,.28), 0 2px 6px rgba(0,0,0,.12)', transition: 'left .55s cubic-bezier(.65,0,.25,1), top .55s cubic-bezier(.65,0,.25,1)' }; })(),
+      caretStyle: (() => { const c = s.coach || { side: 'none' }; const b = { position: 'absolute', width: '14px', height: '14px', background: '#fff', transform: 'rotate(45deg)', transition: 'top .55s, left .55s', display: c.side === 'none' ? 'none' : 'block' };
+        if (c.side === 'left') return { ...b, left: '-6px', top: (c.ay - 7) + 'px' }; if (c.side === 'right') return { ...b, right: '-6px', top: (c.ay - 7) + 'px' };
+        if (c.side === 'top') return { ...b, top: '-6px', left: (c.ax - 7) + 'px' }; return { ...b, bottom: '-6px', left: (c.ax - 7) + 'px' }; })(),
+      coachBody: { padding: '14px 18px 4px', opacity: s.coachVis ? 1 : 0, transform: s.coachVis ? 'none' : 'translateY(4px)', transition: 'opacity .25s ease, transform .25s ease' },
+      chapter: isGuided ? gst.sec.toUpperCase() : "WHAT'S NEW",
+      countText: isGuided ? (s.step + 1) + ' / ' + G.length : (s.tstep + 1) + ' / ' + T.length,
+      isClickStep: isGuided && gst.a === 'click',
+      tThumb: { width: '96px', height: '60px', flex: 'none', borderRadius: '6px', border: '0.5px solid #a9a9a9', backgroundColor: '#fff', backgroundImage: tst.img ? 'url("' + tst.img + '")' : 'none', backgroundSize: 'cover', backgroundPosition: 'center' },
+      introOn: s.introOn, intro0: s.introScene === 0, intro1: s.introScene === 1, intro2: s.introScene === 2, introNav: s.introScene < 2,
+      introWrap: { position: 'fixed', inset: 0, zIndex: 75, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', background: 'rgba(18,52,64,.55)', backdropFilter: 'blur(3px)', opacity: s.introLeaving ? 0 : 1, transition: 'opacity .5s ease', pointerEvents: s.introLeaving ? 'none' : 'auto' },
+      introDots: [0, 1, 2].map(i => ({ st: { width: i === s.introScene ? '22px' : '8px', height: '8px', borderRadius: '4px', background: i === s.introScene ? '#fff' : 'rgba(255,255,255,.35)', transition: 'width .35s ease, background .35s ease' } })),
+      introNext: () => this.setState(st => ({ introScene: Math.min(2, st.introScene + 1) })),
+      introSkip: () => this.setState({ introScene: 2 })
+    };
+  }
+}
+</script>
+</body>
+</html>

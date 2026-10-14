@@ -1,0 +1,51 @@
+/**
+ * ACME Typography Tokens
+ *
+ * Primary font: Inter (variable font — all weights 100–900, normal + italic)
+ * Mono font:    JetBrains Mono (loaded via Google Fonts for code/token labels)
+ *
+ * Inter is used for both display/headings and body copy.
+ * Differentiate heading vs body using font-weight (700–800 for headings, 400–600 for body).
+ */
+
+:root {
+  /* ── Font Families ──────────────────────────────── */
+  --font-display:       'Inter', 'Arial', sans-serif;
+  --font-body:          'Inter', 'Arial', sans-serif;
+  --font-sans:          'Arial', sans-serif;   /* generic fallback for font-family stacks */
+  --font-mono:          'JetBrains Mono', 'Courier New', monospace;
+
+  /* ── Font Weights ───────────────────────────────── */
+  --font-weight-regular:    400;
+  --font-weight-semibold:   600;
+  --font-weight-bold:       700;
+  --font-weight-extrabold:  800;
+
+  /* ── Font Sizes (Display / Headings) ────────────── */
+  --font-size-display-xl:   3rem;       /* 48px — hero titles */
+  --font-size-display-lg:   2.25rem;    /* 36px — page titles */
+  --font-size-display-md:   1.875rem;   /* 30px — section title */
+  --font-size-h1:           1.5rem;     /* 24px */
+  --font-size-h2:           1.25rem;    /* 20px */
+  --font-size-h3:           1.125rem;   /* 18px */
+  --font-size-h4:           1rem;       /* 16px */
+
+  /* ── Font Sizes (Body / UI) ─────────────────────── */
+  --font-size-lg:           1.125rem;   /* 18px */
+  --font-size-md:           1rem;       /* 16px — default body */
+  --font-size-sm:           0.875rem;   /* 14px — secondary text */
+  --font-size-xs:           0.75rem;    /* 12px — captions, labels */
+
+  /* ── Line Heights ───────────────────────────────── */
+  --line-height-tight:      1.2;
+  --line-height-snug:       1.35;
+  --line-height-normal:     1.5;
+  --line-height-relaxed:    1.65;
+
+  /* ── Letter Spacing ─────────────────────────────── */
+  --letter-spacing-tight:   -0.01em;
+  --letter-spacing-normal:   0;
+  --letter-spacing-wide:     0.05em;
+  --letter-spacing-wider:    0.1em;
+  --letter-spacing-caps:     0.12em;   /* used for sub-brand caps: "DIVISION A" */
+}

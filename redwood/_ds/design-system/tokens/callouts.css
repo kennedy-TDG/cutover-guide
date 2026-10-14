@@ -1,0 +1,48 @@
+/**
+ * ACME Callout Box Tokens
+ * ACME
+ *
+ * Five semantic types follow the Innovation Line color families.
+ * Structure tokens apply to all types; per-type tokens set color.
+ */
+
+:root {
+  /* ── Structure (all types) ──────────────────── */
+  --callout-padding:            10px 14px;
+  --callout-border-width:       1px;          /* @kind other */
+  --callout-border-radius:      0px;
+  --callout-gap:                12px;
+  --callout-font-size:          var(--font-size-sm);    /* 14px */
+  --callout-line-height:        var(--line-height-normal);
+  --callout-title-weight:       var(--font-weight-bold);
+
+  /* ── Info (Teal) ────────────────────────────── */
+  --callout-info-bg:            #E8F5F6;
+  --callout-info-border:        #7CC8CC;
+  --callout-info-icon-color:    #326DC2;
+
+  /* ── Warning (Red/Orange) ───────────────────── */
+  --callout-warning-bg:         #FEF2EF;
+  --callout-warning-border:     #F4A48C;
+  --callout-warning-icon-color: #C0392B;
+
+  /* ── Check / Success (Green) ────────────────── */
+  --callout-check-bg:           #F3F9E8;
+  --callout-check-border:       #A8CC72;
+  --callout-check-icon-color:   #43884D;
+
+  /* ── General / Neutral ──────────────────────── */
+  --callout-general-bg:         #F3F4F5;
+  --callout-general-border:     #D1D5DB;
+  --callout-general-icon-color: #6B7280;
+
+  /* ── Note (Neutral + notepad icon) ─────────── */
+  --callout-note-bg:            #F3F4F5;
+  --callout-note-border:        #D1D5DB;
+  --callout-note-icon-color:    #6B7280;
+
+  /* ── Purple ─────────────────────────────────── */
+  --callout-purple-bg:          #F5EEFE;
+  --callout-purple-border:      #C4A0E8;
+  --callout-purple-icon-color:  var(--color-purple-700);
+}

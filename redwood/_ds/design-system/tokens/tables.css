@@ -1,0 +1,77 @@
+/**
+ * ACME Table Tokens
+ * ACME
+ *
+ * Any plain <table> in a document that links styles.css inherits these
+ * base styles automatically. The DataTable React component reads from
+ * these same tokens.
+ */
+
+:root {
+  /* ── Structure ──────────────────────────────── */
+  --table-border:             0.25pt solid #E0E4E7; /* @kind other */
+  --table-border-color:       #E0E4E7;
+  --table-cell-padding:       4px 8px;
+  --table-radius:             0;
+
+  /* ── Typography ─────────────────────────────── */
+  --table-font-family:        var(--font-body);
+  --table-font-size:          13px;
+  --table-line-height:        1.25;
+
+  /* ── Colors ─────────────────────────────────── */
+  --table-body-color:         #000000;
+  --table-col1-color:         #326DC2;
+  --table-row-bg:             #ffffff;
+
+  /* ── Header ─────────────────────────────────── */
+  --table-header-bg:          #326DC2;
+  --table-header-color:       #ffffff;
+  --table-header-divider:     0.25pt solid rgba(255,255,255,0.25); /* @kind other */
+}
+
+/* ── Base table element styles ──────────────────
+   Any <table> in a doc that links styles.css gets
+   these rules automatically — no extra class needed.
+────────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--table-font-family);
+  font-size: var(--table-font-size);
+  line-height: var(--table-line-height);
+  color: var(--table-body-color);
+  border-radius: var(--table-radius);
+}
+
+table th,
+table td {
+  padding: var(--table-cell-padding);
+  border: var(--table-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+table thead tr {
+  background: var(--table-header-bg);
+}
+
+table thead th {
+  color: var(--table-header-color);
+  font-weight: 700;
+  border-color: rgba(255,255,255,0.25);
+  border-width: 0.25pt;
+}
+
+table thead th + th {
+  border-left: var(--table-header-divider);
+}
+
+table tbody tr {
+  background: var(--table-row-bg);
+}
+
+table tbody td:first-child {
+  color: var(--table-col1-color);
+  font-weight: 600;
+}

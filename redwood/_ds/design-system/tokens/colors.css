@@ -1,0 +1,148 @@
+/**
+ * ACME Color Tokens
+ * ACME
+ *
+ * Color families follow the "Innovation Line" order: Teal → Green → Orange → Purple
+ */
+
+:root {
+  /* ── Base Backgrounds ─────────────────────────────── */
+  --color-bg-white:       #ffffff;
+  --color-bg-warm:        #fdfcf9;
+  --color-cream:          #f5eee9;  /* PMS 9100 — background-only accent; never text or border */
+
+  /* ── Teal (Primary / Blue Family) ────────────────── */
+  --color-teal-900:       #326DC2;  /* ← exact logo teal, sampled */
+  --color-teal-800:       #1356B8;
+  --color-teal-700:       #1A6AD9;
+  --color-teal-600:       #326DC2;
+  --color-teal-500:       #3B8BF5;
+  --color-teal-400:       #62A2F7;
+  --color-teal-300:       #9FC6FF;
+  --color-teal-200:       #C4DBFC;
+  --color-teal-100:       #FDF8F0;
+  --color-teal-50:        #F8F9FA;
+
+  /* ── Green ────────────────────────────────────────── */
+  --color-green-900:      #3b7740;
+  --color-green-800:      #43884d;
+  --color-green-700:      #498b48;
+  --color-green-600:      #5F646A;  /* ← exact bar green, sampled */
+  --color-green-500:      #8fc459;
+  --color-green-400:      #c7e2ad;
+  --color-green-300:      #e9f2da;
+  --color-green-200:      #f8fae9;
+  --color-green-100:      #fafcee;
+  --color-green-50:       #fefffa;
+
+  /* ── Orange / Red ─────────────────────────────────── */
+  --color-orange-900:     #c03004;
+  --color-orange-800:     #b83f0f;
+  --color-orange-700:     #9A6416;
+  --color-orange-600:     #9A6416;
+  --color-orange-500:     #5F646A;  /* ← exact bar orange, sampled */
+  --color-orange-400:     #ee6e18;
+  --color-orange-300:     #f2a15b;
+  --color-orange-200:     #f8c08b;
+  --color-orange-100:     #fef7ef;
+  --color-orange-50:      #fae6d6;
+
+  /* ── Purple ───────────────────────────────────────── */
+  --color-purple-900:     #841d65;
+  --color-purple-800:     #883672;
+  --color-purple-700:     #ac2a8c;
+  --color-purple-600:     #bf4cb1;
+  --color-purple-500:     #5F646A;  /* ← exact bar purple, sampled */
+  --color-purple-400:     #df6acc;
+  --color-purple-300:     #e895de;
+  --color-purple-200:     #f0b0ee;
+  --color-purple-100:     #fdf8ff;
+  --color-purple-50:      #f8e0fa;
+
+  /* ── Neutrals ─────────────────────────────────────── */
+  --color-neutral-900:    #111827;
+  --color-neutral-800:    #1f2937;
+  --color-neutral-700:    #374151;
+  --color-neutral-600:    #4b5563;
+  --color-neutral-500:    #6b7280;
+  --color-neutral-400:    #9ca3af;
+  --color-neutral-300:    #d1d5db;
+  --color-neutral-200:    #e5e7eb;
+  --color-neutral-100:    #f3f4f6;
+  --color-neutral-50:     #f9fafb;
+  --color-white:          #ffffff;
+
+  /* ── Semantic Aliases ─────────────────────────────── */
+  --color-brand-primary:          var(--color-teal-900);
+  --color-brand-primary-dark:     var(--color-teal-900);
+  --color-brand-primary-medium:   var(--color-teal-600);
+  --color-brand-primary-light:    var(--color-teal-100);
+
+  --color-surface-page:           var(--color-bg-white);
+  --color-background-primary:     var(--color-bg-white);   /* alias used in component-level inline styles */
+  --color-surface-warm:           var(--color-bg-warm);
+  --color-surface-teal-light:     var(--color-teal-100);
+  --color-surface-green-light:    var(--color-green-100);
+  --color-surface-orange-light:   var(--color-orange-100);
+  --color-surface-purple-light:   var(--color-purple-100);
+
+  --color-text-primary:           var(--color-neutral-900);
+  --color-text-secondary:         var(--color-neutral-600);
+  --color-text-disabled:          var(--color-neutral-400);
+  --color-text-on-dark:           var(--color-white);
+  --color-text-brand:             var(--color-teal-800);
+  --color-text-link:              var(--color-teal-600);
+  --color-text-danger:            var(--color-orange-700);
+
+  --color-border-default:         var(--color-neutral-200);
+  --color-border-strong:          var(--color-neutral-300);
+  --color-border-brand:           var(--color-teal-600);
+  --color-border-tertiary:        #D3E2FA;   /* light teal-tinted separator — checklist rows, numbered card outlines */
+
+  /* ── Secondary Color Tiers ───────────────────────── */
+  /*
+   * Three tiers used across ACME communications:
+   *  Light — most common in graphics, backgrounds, soft accents
+   *  Mid   — workhorse for charts, the Innovation Line on cream, graphic fills
+   *  Dark  — primarily for text/type and emphasis; used sparingly for graphics
+   *          Exception: Dark Teal (#326DC2) IS the primary brand color.
+   */
+
+  /* Light (soft tints) */
+  --color-secondary-light-teal:    #BFD7FB;
+  --color-secondary-light-green:   #CDE675;
+  --color-secondary-light-lilac:   #EDBCFD;
+  --color-secondary-light-orange:  #FFAC64;
+
+  /* Mid (vivid accents) */
+  --color-secondary-mid-teal:      #326DC2;
+  --color-secondary-mid-green:     #5F646A;
+  --color-secondary-mid-lilac:     #5F646A;
+  --color-secondary-mid-orange:    #5F646A;
+
+  /* Dark (type + emphasis) */
+  --color-secondary-dark-teal:     #326DC2;  /* = --color-brand-primary */
+  --color-secondary-dark-green:    #3F884D;
+  --color-secondary-dark-lilac:    #883572;
+  --color-secondary-dark-orange:   #B83F0F;
+
+  /* ── Business Unit Accent Colors (light/pastel) ─── */
+  /* These are the official per-BU identification colors  */
+  --color-bu-a:                  #BFD7FB;  /* ACME Division A     — Light Teal    */
+  --color-bu-b:               #CDE675;  /* ACME Division B — Light Green   */
+  --color-bu-c:         #EDBCFD;  /* ACME Division C — Light Lilac   */
+  --color-bu-d:              #FFAC64;  /* ACME Division D — Light Orange  */
+
+  /* Dark equivalents (for text/icons on light surfaces) */
+  --color-bu-a-dark:             var(--color-teal-700);
+  --color-bu-b-dark:          var(--color-green-700);
+  --color-bu-c-dark:    var(--color-purple-700);
+  --color-bu-d-dark:         var(--color-orange-700);
+
+  /* ── Innovation Line (ordered) ───────────────────── */
+  /* These four exactly match the color bar on the ACME logo */
+  --color-innovation-1:           #326DC2;  /* teal   */
+  --color-innovation-2:           #5F646A;  /* green  */
+  --color-innovation-3:           #5F646A;  /* purple */
+  --color-innovation-4:           #5F646A;  /* orange */
+}
